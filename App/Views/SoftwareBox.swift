@@ -118,7 +118,7 @@ struct SoftwareBox: View {
     @ViewBuilder private var sticker: some View {
         if hasUpdate {
             Starburst(text: "UPDATE", fill: Color(hex: "#E03A3E"), ink: .white)
-        } else if case .installed = state {
+        } else if state.isOwned {
             PriceTag(text: "OWNED")
         } else if isNew {
             Starburst(text: "NEW!", fill: Color(hex: "#FDE047"), ink: Color(hex: "#B91C1C"))

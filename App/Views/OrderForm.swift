@@ -56,6 +56,11 @@ struct OrderForm: View {
                             }
                             .buttonStyle(RetroButtonStyle(prominent: false))
                         }
+                    } else if app.isHerdrMod {
+                        Text("The store checks it against its published checksum and puts its mods in ~/.config/herdr-app/mods, sending an older copy to the Trash. Its keys go in keys.json only where they're free.")
+                            .font(Typeface.garamond(13.5, "Italic"))
+                            .foregroundStyle(Color.ink.opacity(0.8))
+                            .fixedSize(horizontal: false, vertical: true)
                     } else if app.isMacApp {
                         Text("The store unpacks the app, checks it against its published checksum and puts it in your Applications folder. An older copy goes to the Trash.")
                             .font(Typeface.garamond(13.5, "Italic"))
@@ -98,18 +103,26 @@ struct OrderForm: View {
         case .verifying:
             busy("Checking the checksum…")
         case .installing:
-            busy("Putting it in Applications…")
+            busy(app.isHerdrMod ? "Putting it in Herdr's mods…" : "Putting it in Applications…")
+        case .linked(let target):
+            Button("Show the Checkout") { NSWorkspace.shared.activateFileViewerSelecting([target]) }
+                .buttonStyle(RetroButtonStyle(prominent: false))
+            Text("Linked to your checkout at \(target.deletingLastPathComponent().deletingLastPathComponent().path), so the store leaves it alone. Update it there.")
+                .font(Typeface.garamond(13.5, "Italic"))
+                .fixedSize(horizontal: false, vertical: true)
         case .installed(let version, let url):
             HStack(spacing: 10) {
                 if let r = release, r.version.compare(version, options: .numeric) == .orderedDescending {
                     Button("Update to v\(r.version)") { installer.install(app, release: r) }
                         .buttonStyle(RetroButtonStyle(prominent: true))
                 }
-                Button("Open \(app.title)") { installer.open(app) }
+                Button(app.isHerdrMod ? "Open Herdr" : "Open \(app.title)") { installer.open(app) }
                     .buttonStyle(RetroButtonStyle(prominent: !(installer.hasUpdate(app))))
             }
-            Text("v\(version) is installed in \(url.deletingLastPathComponent().path).")
+            Text("v\(version) is installed in \(url.deletingLastPathComponent().path)."
+                 + (installer.notes[app.id].map { " " + $0 } ?? ""))
                 .font(Typeface.garamond(13.5, "Italic"))
+                .fixedSize(horizontal: false, vertical: true)
         case .downloaded(let url):
             Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }
                 .buttonStyle(RetroButtonStyle(prominent: true))
@@ -121,8 +134,13 @@ struct OrderForm: View {
             Text(message).font(Typeface.garamond(13.5, "Italic")).foregroundStyle(Color(hex: "#B91C1C"))
                 .fixedSize(horizontal: false, vertical: true)
         case .notInstalled:
-            Button(app.isMacApp ? "Install \(app.title)" : "Download the Zip") { installer.install(app, release: release) }
+            Button(app.isMacApp || app.isHerdrMod ? "Install \(app.title)" : "Download the Zip") { installer.install(app, release: release) }
                 .buttonStyle(RetroButtonStyle(prominent: true))
+                .disabled(app.isHerdrMod && !installer.hasHerdr)
+            if app.isHerdrMod && !installer.hasHerdr {
+                Text("Needs the Herdr app, from herdr.dev.")
+                    .font(Typeface.garamond(13.5, "Italic"))
+            }
         }
     }
 

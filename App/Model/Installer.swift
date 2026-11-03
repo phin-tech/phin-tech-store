@@ -10,7 +10,17 @@ enum InstallState: Equatable {
     case verifying
     case installing
     case downloaded(URL)
+    /// A Herdr app mod that is a symbolic link to a checkout: the store leaves it alone.
+    case linked(URL)
     case failed(String)
+
+    /// On this Mac, whether installed by the store or linked to a checkout.
+    var isOwned: Bool {
+        switch self {
+        case .installed, .linked: true
+        default: false
+        }
+    }
 
     var isBusy: Bool {
         switch self {
@@ -25,6 +35,10 @@ enum InstallState: Equatable {
 @MainActor
 final class Installer: ObservableObject {
     @Published private(set) var states: [String: InstallState] = [:]
+    /// What the last install of each app has to say, like which of a mod's keys were already taken.
+    @Published private(set) var notes: [String: String] = [:]
+
+    static let herdrBundleID = "dev.herdr.app"
 
     private let fm = FileManager.default
     private var installedPaths: [String: String] {
@@ -48,6 +62,13 @@ final class Installer: ObservableObject {
     }
 
     private func detect(_ app: StoreApp) -> InstallState {
+        if let mods = app.mods, !mods.isEmpty {
+            switch HerdrMods.status(of: mods) {
+            case .notInstalled: return .notInstalled
+            case let .installed(version, at): return .installed(version: version, at: at)
+            case let .linked(to): return .linked(to)
+            }
+        }
         guard app.isMacApp else { return .notInstalled }
         var candidates: [URL] = []
         if let saved = installedPaths[app.id] { candidates.append(URL(fileURLWithPath: saved)) }
@@ -64,14 +85,27 @@ final class Installer: ObservableObject {
     }
 
     func open(_ app: StoreApp) {
+        if app.isHerdrMod {
+            if let herdr = NSWorkspace.shared.urlForApplication(withBundleIdentifier: Installer.herdrBundleID) {
+                NSWorkspace.shared.openApplication(at: herdr, configuration: .init())
+            }
+            return
+        }
         if case let .installed(_, url) = state(for: app) {
             NSWorkspace.shared.openApplication(at: url, configuration: .init())
         }
     }
 
+    /// Whether the Herdr desktop app is on this Mac, for its mods.
+    var hasHerdr: Bool {
+        NSWorkspace.shared.urlForApplication(withBundleIdentifier: Installer.herdrBundleID) != nil || HerdrMods.hasHerdr()
+    }
+
     func install(_ app: StoreApp, release: CatalogFile.Release? = nil) {
         guard let release = release ?? app.latest, !state(for: app).isBusy else { return }
+        if case .linked = state(for: app) { return }
         states[app.id] = .downloading(0)
+        notes[app.id] = nil
         Task {
             do {
                 let zip = try await download(app.downloadURL(for: release), expected: release.size) { [weak self] p in
@@ -83,7 +117,13 @@ final class Installer: ObservableObject {
                     try? fm.removeItem(at: zip)
                     throw StoreError("The download did not match its published checksum, so it was thrown away.")
                 }
-                if app.isMacApp {
+                if app.isHerdrMod {
+                    states[app.id] = .installing
+                    let result = try await Task.detached { try Installer.installMods(fromZip: zip) }.value
+                    let at = result.installed.first ?? HerdrMods.home.appendingPathComponent("mods")
+                    states[app.id] = .installed(version: result.version, at: at)
+                    notes[app.id] = Installer.describe(result)
+                } else if app.isMacApp {
                     states[app.id] = .installing
                     let installed = try await Task.detached { try Installer.installApp(fromZip: zip) }.value
                     var paths = installedPaths
@@ -100,7 +140,7 @@ final class Installer: ObservableObject {
                     NSWorkspace.shared.activateFileViewerSelecting([dest])
                 }
             } catch {
-                states[app.id] = .failed((error as? StoreError)?.message ?? error.localizedDescription)
+                states[app.id] = .failed((error as? StoreError)?.message ?? (error as? ModError)?.message ?? error.localizedDescription)
             }
         }
     }
@@ -175,6 +215,30 @@ final class Installer: ObservableObject {
             }
         }
         throw lastError ?? StoreError("Could not move the app into Applications.")
+    }
+
+    /// Unpacks a Herdr mod release and installs its mods (see HerdrMods).
+    nonisolated static func installMods(fromZip zip: URL) throws -> HerdrMods.Result {
+        let fm = FileManager.default
+        let work = fm.temporaryDirectory.appendingPathComponent("phin-store-" + UUID().uuidString)
+        try fm.createDirectory(at: work, withIntermediateDirectories: true)
+        defer { try? fm.removeItem(at: work); try? fm.removeItem(at: zip) }
+        let ditto = Process()
+        ditto.executableURL = URL(fileURLWithPath: "/usr/bin/ditto")
+        ditto.arguments = ["-x", "-k", zip.path, work.path]
+        try ditto.run()
+        ditto.waitUntilExit()
+        guard ditto.terminationStatus == 0 else { throw StoreError("The zip would not unpack.") }
+        return try HerdrMods.install(fromUnpacked: work)
+    }
+
+    nonisolated static func describe(_ result: HerdrMods.Result) -> String {
+        var parts = ["Herdr picks it up as soon as it's there."]
+        if !result.keysAdded.isEmpty { parts.append("Added \(result.keysAdded.joined(separator: " and ")) to keys.json.") }
+        if !result.keysKept.isEmpty {
+            parts.append("\(result.keysKept.joined(separator: " and ")) \(result.keysKept.count == 1 ? "was" : "were") already bound, so your binding stays.")
+        }
+        return parts.joined(separator: " ")
     }
 
     nonisolated private static func findApp(in dir: URL) throws -> URL? {

@@ -102,8 +102,8 @@ private struct StoreMenuItems: View {
     var body: some View {
         if let app = router.showingApp {
             let state = installer.state(for: app)
-            if case .installed = state {
-                Button("Open \(app.title)") { installer.open(app) }
+            if state.isOwned {
+                Button(app.isHerdrMod ? "Open Herdr" : "Open \(app.title)") { installer.open(app) }
                     .keyboardShortcut("o")
                 if installer.hasUpdate(app) {
                     Button("Update \(app.title)") { installer.install(app) }

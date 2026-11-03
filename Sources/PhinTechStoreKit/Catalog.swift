@@ -10,6 +10,8 @@ public struct CatalogFile: Codable, Sendable {
         public var category: String?
         public var how: String?
         public var source: String?
+        /// For a Herdr app mod: the mods it installs (app-release's `kind = "herdr-mod"`).
+        public var mods: [String]?
         public var pinned: Bool?
         public var locked: Bool?
         public var releases: [Release]
@@ -35,9 +37,12 @@ public struct StoreApp: Identifiable, Hashable, Sendable {
     public let source: URL?
     public let pinned: Bool
     public let releases: [CatalogFile.Release]
+    /// The mods a Herdr app mod installs into ~/.config/herdr-app/mods; nil for anything else.
+    public let mods: [String]?
 
     public var latest: CatalogFile.Release? { releases.first }
-    public var isMacApp: Bool { category == StoreApp.macApps }
+    public var isMacApp: Bool { category == StoreApp.macApps && mods == nil }
+    public var isHerdrMod: Bool { !(mods ?? []).isEmpty }
     /// On the shelves for its code alone: nothing to download, only a repository to get it from (a server, say).
     public var isListing: Bool { releases.isEmpty && source != nil }
 
@@ -66,6 +71,7 @@ public struct StoreApp: Identifiable, Hashable, Sendable {
         how = entry.how
         source = entry.source.flatMap(URL.init(string:))
         pinned = entry.pinned ?? false
+        mods = entry.mods
         releases = entry.releases.sorted { $0.date == $1.date ? $0.version.compare($1.version, options: .numeric) == .orderedDescending : $0.date > $1.date }
     }
 }
