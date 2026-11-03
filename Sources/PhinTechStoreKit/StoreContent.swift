@@ -9,6 +9,8 @@ public struct AdCopy: Codable, Sendable, Equatable {
         public init(heading: String? = nil, body: String) { self.heading = heading; self.body = body }
     }
 
+    /// The name to show, when it isn't the catalog's (which is how the .app is named, like PhinTechStore).
+    public var title: String?
     public var layout: Layout
     public var boxColor: String
     public var headline: String
@@ -22,7 +24,7 @@ public struct AdCopy: Codable, Sendable, Equatable {
     public static func plain(for app: StoreApp) -> AdCopy {
         let palette = ["#7C2D12", "#1E3A8A", "#14532D", "#581C87", "#0F766E", "#9F1239"]
         let seed = app.id.unicodeScalars.reduce(0) { ($0 &* 31 &+ Int($1.value)) & 0x7fff_ffff }
-        return AdCopy(layout: .classic, boxColor: palette[seed % palette.count], headline: app.title + ".",
+        return AdCopy(title: nil, layout: .classic, boxColor: palette[seed % palette.count], headline: app.title + ".",
                       kicker: nil, sections: [.init(body: app.summary)], tagline: "From Phin Tech.", finePrint: nil)
     }
 }

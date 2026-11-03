@@ -45,7 +45,7 @@ struct RootView: View {
             StoreView(store: store, installer: installer) { router.open($0) }
                 .navigationDestination(for: StoreApp.self) { app in
                     AdPageView(app: app, installer: installer)
-                        .navigationTitle(app.title)
+                        .navigationTitle(AdCopy.for(app).title ?? app.title)
                 }
                 .navigationTitle("Phin Tech Store")
         }

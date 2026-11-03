@@ -33,14 +33,14 @@ struct SoftwareBox: View {
         .animation(.spring(response: 0.28, dampingFraction: 0.7), value: hovering)
         .onHover { hovering = $0 }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(app.title). \(app.summary)")
+        .accessibilityLabel("\(copy.title ?? app.title). \(app.summary)")
         .accessibilityAddTraits(.isButton)
     }
 
     private var front: some View {
         VStack(spacing: 0) {
             // Title band.
-            Text(app.title.uppercased())
+            Text((copy.title ?? app.title).uppercased())
                 .font(.custom("Futura-CondensedExtraBold", fixedSize: width * 0.105))
                 .tracking(0.4)
                 .lineSpacing(-2)
@@ -99,7 +99,7 @@ struct SoftwareBox: View {
                 stripes(vertical: true).frame(width: 4)
                 Spacer()
             }
-            Text(app.title.uppercased())
+            Text((copy.title ?? app.title).uppercased())
                 .font(.custom("Futura-Bold", fixedSize: 11))
                 .tracking(2)
                 .lineLimit(1)

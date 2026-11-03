@@ -205,5 +205,31 @@
     ],
     "tagline": "Never miss a meeting again.",
     "finePrint": "Slaps works with every calendar in the macOS Calendar app. Coffee spills are the user's responsibility."
+  },
+  "PhinTechStore": {
+    "title": "Phin Tech Store",
+    "layout": "product",
+    "boxColor": "#7A4A1F",
+    "headline": "The whole shop, on your own shelves.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Every app on this page, standing on walnut shelves on your Mac. Pick up a box, read its ad, and clip the order form."
+      },
+      {
+        "body": "Install puts the app in your Applications folder, after checking it against its published checksum. An older copy goes to the Trash, never to oblivion."
+      },
+      {
+        "body": "Boxes with a newer version wear an Update sticker. Update All takes care of every one at once."
+      },
+      {
+        "body": "New apps arrive on the shelves on their own, ads and all, and the store keeps itself up to date while you sleep."
+      },
+      {
+        "body": "The hard part is choosing."
+      }
+    ],
+    "tagline": "Pepper never forgets.",
+    "finePrint": "The Phin Tech Store runs on macOS 14 Sonoma or later. Walnut shelving not included with every Mac."
   }
 }
