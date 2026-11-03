@@ -142,6 +142,18 @@
       "style": "box",
       "aspect": "3:4",
       "prompt": "a tall glowing beige server tower rising like a skyscraper at dusk, orange and blue twisted cables running out from its base to a ring of small desk telephones and computers, a cheerful small robot waving from a lit window near the top, against a deep violet to orange sky."
+    },
+    {
+      "name": "herdr-phin-picker-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a programmer in a cardigan at a wooden desk at dusk, one finger on a beige keyboard, the green-phosphor screen showing a neat vertical list of project names with one highlighted, a friendly cream mutt with floppy ears resting its chin on the desk beside the keyboard, a brass desk lamp, index cards pinned to a corkboard."
+    },
+    {
+      "name": "herdr-phin-picker-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a glowing teal magnifying glass picking one shining folder out of a swirling constellation of hundreds of tiny folders and branching git-tree lines, against a deep indigo and teal night sky with sparkles."
     }
   ]
 }

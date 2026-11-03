@@ -296,5 +296,34 @@
     ],
     "tagline": "The server for Twisted Pair.",
     "finePrint": "Twisted Pair Server needs Twisted Pair, the desktop client, which is sold separately (also free). Server closet not included."
+  },
+  "herdr-phin-picker": {
+    "title": "Phin Picker",
+    "layout": "classic",
+    "boxColor": "#0F766E",
+    "headline": "Every project. One keystroke.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Press ⌘O in Herdr and every project you have is in front of you, the ones you use most at the top."
+      },
+      {
+        "body": "Type a few letters to narrow it down. Press Tab for its branches and worktrees. Press Enter and you're there, in a Space of its own."
+      },
+      {
+        "body": "What if it's a pull request?"
+      },
+      {
+        "body": "Paste the link. Phin Picker clones the repository if you don't have it, makes a worktree on the branch and opens it. A whole stack of pull requests opens as one Space, a tab for each layer."
+      },
+      {
+        "body": "Paste a GitHub issue or a Linear ticket, and you get a branch named for it. Type org: to browse a whole organization."
+      },
+      {
+        "body": "It never leaves home row. Neither does your train of thought."
+      }
+    ],
+    "tagline": "The shortest way to anywhere.",
+    "finePrint": "Phin Picker is a mod for the Herdr desktop app. It needs git, and gh signed in for pull requests and issues. Keys are added only where they're free."
   }
 }

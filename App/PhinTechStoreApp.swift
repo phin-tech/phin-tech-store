@@ -110,7 +110,7 @@ private struct StoreMenuItems: View {
                         .keyboardShortcut("u")
                 }
             } else if !app.isListing {
-                Button(app.isMacApp ? "Install \(app.title)" : "Download \(app.title)") { installer.install(app) }
+                Button(app.isMacApp || app.isHerdrMod ? "Install \(app.title)" : "Download \(app.title)") { installer.install(app) }
                     .keyboardShortcut("i")
                     .disabled(state.isBusy)
             }
