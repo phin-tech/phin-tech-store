@@ -5,7 +5,9 @@ is the SwiftUI app.
 
 ## Where things are explained
 
-- `DEVELOPMENT.md`: building, signing, testing, releasing, updates.
+- `DEVELOPMENT.md`: how the store works, building, signing, testing, releasing, updates, and the content it shares with
+  apps.phin.tech (`content/`, `just publish-content`).
+- `README.md`: what the store is, and adding an app's ad.
 
 ## Done
 
@@ -14,6 +16,8 @@ The change is done when these pass, and your report names any you did not run:
 - `just test`, always.
 - `just build` for changes under `App/` or to `project.yml`.
 - `just release-check` for changes to `release.toml`, `scripts/release` or `.bumpversion.toml`.
+- `just publish-content --dry-run` for changes to `content/`, and `just publish-content` only when asked: it changes
+  what every installed store and apps.phin.tech show.
 
 ## Generated files
 
@@ -29,7 +33,14 @@ The change is done when these pass, and your report names any you did not run:
   the app running; the maintainer may have their own open.
 - Sparkle is an Xcode-only dependency (project.yml); keep it out of `Package.swift`, or `swift test` would build it.
 - The release tool is app-release, a separate repository pinned in `scripts/release/pyproject.toml`; change it there,
-  not here.
+  not here. It also draws apps.phin.tech (`page.py`), and each release redraws the page with its own version: keep the
+  pin on the newest tag, and move the other projects that publish there with it.
+- `just debug snapshot` comes out blank for the shelves and the ads (a SwiftUI `ScrollView` in a `NavigationStack`
+  draws in layers the snapshot misses). Bring the app to the front and use `screencapture -o -l <window id>`.
+- Cloudflare in front of apps.phin.tech refuses Python's default User-Agent (403). Send one, as
+  `tools/publish-content.py` does.
+- `uv` fetches app-release from git.phin.tech with git's credentials. An agent should use bender's token
+  (`~/.config/bender/env`) through `GIT_CONFIG_COUNT`/`http.https://git.phin.tech/.extraheader`, not the maintainer's.
 
 ## Releases
 

@@ -1,5 +1,24 @@
 # Developing PhinTechStore
 
+## How the store works
+
+- **The catalog** is `https://apps.phin.tech/apps.json`, the download page's manifest, which app-release writes when
+  any app is released there. `CatalogLoader` (in `PhinTechStoreKit`) groups it into a shelf per category and keeps the
+  last copy in `~/Library/Application Support/Phin Tech Store/` for offline launches. A new release of any app shows up
+  without a release of the store.
+- **Installing** (`App/Model/Installer.swift`) downloads `<key>/<file>` from the page, checks the SHA-256 the
+  catalog lists, unpacks it with `ditto`, and moves the `.app` into `/Applications` (or `~/Applications`), sending an
+  older copy to the Trash. A Herdr plugin's zip goes to Downloads instead. The installed version is read from
+  the app's `Info.plist` each time, not with `Bundle(url:)`, which caches per path and would keep reporting the old
+  version after an update.
+- **Ads and art** come from `_store/content.json` on the page (see below), with `content/` as built into the app as the
+  fallback. `StoreContent` fetches the manifest on launch and on ⌘R, and downloads only pictures whose checksum it
+  doesn't have.
+- **Menus** that depend on state (Store, View) are small views (`StoreMenuItems`, `ViewMenuItems`) observing the
+  models. Plain command closures don't redraw when the models change.
+- **Updates**: Sparkle checks once a day and installs without asking (`SUAutomaticallyUpdate`). Settings turns that
+  off.
+
 ## Building
 
 Needs Xcode 26.6 or later, [xcodegen](https://github.com/yonaskolb/XcodeGen), [just](https://just.systems)
@@ -83,6 +102,35 @@ installed copies only accept updates signed by it. Do not lose or replace that k
 reject every later update. `just appcast` checks every entry is signed and the new one verifies before it uploads.
 Sparkle's tools are downloaded, pinned, into `~/Library/Caches/app-release`. Debug builds do not check for updates.
 
+## Content and the download page
+
+`content/` is the store's own content, and also the source of what apps.phin.tech shows:
+
+| Path | What |
+| --- | --- |
+| `content/ads.json` | Each app's ad, keyed as in `apps.json` (`PhinTechStore`, `Dottie`, `herdr-phin-util`): `layout`, `boxColor`, `headline`, `kicker`, `sections`, `tagline`, `finePrint`, and `title` for a name other than the catalog's |
+| `content/art/<key>-box.jpg`, `<key>-hero.jpg` | The box cover (3:4) and the ad's picture |
+| `content/promo.json` | The app offered in the first-visit dialog and on the seal on the page's sign (this store) |
+| `content/store.json` | The hotline number and its page, for the sign, the ads' fine print and Help |
+| `content/site/` | Pictures for the page only (Pepper's mark); the wall and shop front come from `App/Resources/Art` |
+
+`just publish-content` uploads whatever changed to `_store/` on the page (with `cf`, as `just ship` does) and then
+`_store/content.json`, which lists it all with checksums. Installed stores show it the next time they open. The
+page shows it at the next release of any app that publishes there, or now with `just release-tool page`. A new
+app's ad needs no release of the store.
+
+**New art.** Add `<key>-box` and `<key>-hero` prompts to `art/prompts.json`, then run
+`tools/genart.py <key>-box <key>-hero`. It calls an image model on OpenRouter (`tools/genimage.py`; the key is read
+from 1Password, `op://Private/w5vhn64v3mb4pqr4wvvemwbtlu/credential`, unless `OPENROUTER_API_KEY` is set) and writes
+JPEGs into `content/art`. `--ref` gives the model a reference picture. Use the Pepper art in
+`../jeo-paw-dy/brand/pepper-head.png` for anything with Pepper in it: Pepper is a cream mutt with floppy ears, and the
+right one is orange with a brown patch. The key has its own spending cap on OpenRouter; a `402 Payment Required` means
+that cap is used up, even when the account has credit.
+
+**The page's design** lives in [app-release](https://git.phin.tech/sam/app-release) (`page.py`), not here. Every
+release redraws the whole page with the app-release it runs. So this repo and every project that publishes to the page
+stay on the newest app-release tag, or an older one puts the old page back.
+
 ## First release
 
 Once, before the first `just ship`:
@@ -95,5 +143,9 @@ Once, before the first `just ship`:
    this before uploading anything). For a key of its own, run Sparkle's `generate_keys -x <file>` from
    `~/Library/Caches/app-release/sparkle/*/bin`, put the private key in a new item, and switch to it with
    `uvx copier update --defaults -d op_item=<item> -d sparkle_public_key=<public key>`.
+4. `Signing.local.xcconfig` (gitignored) with `DEVELOPMENT_TEAM = J35P7AJDN7` and
+   `CODE_SIGN_IDENTITY = Apple Development`. Without it, the development build `just ship` installs in
+   `/Applications` is signed ad hoc while Sparkle inside it has the team's signature, and it crashes at launch
+   ("different Team IDs"). The notarized release is fine either way.
 
 Then `just ship minor --dry-run`, and if that reads right, `just ship minor`.

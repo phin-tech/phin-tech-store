@@ -55,6 +55,7 @@ description. To give it a real ad, no release of the store needed:
    pictures they don't have.
 
 What's in `content/` when the store is built ships inside it too, for when it can't reach
-apps.phin.tech.
+apps.phin.tech. The same content draws [apps.phin.tech](https://apps.phin.tech) as the shop, with the download seal
+and the Phin Tech Hotline: see "Content and the download page" in [DEVELOPMENT.md](DEVELOPMENT.md).
 
 Fonts: EB Garamond (SIL Open Font License, `App/Resources/Fonts/OFL.txt`).
