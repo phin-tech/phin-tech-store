@@ -30,6 +30,12 @@ final class UpdateChecker {
         set { controller.updater.automaticallyChecksForUpdates = newValue }
     }
 
+    /// The Settings toggle for installing updates without asking (SUAutomaticallyUpdate is the default).
+    var automaticDownloads: Bool {
+        get { controller.updater.automaticallyDownloadsUpdates }
+        set { controller.updater.automaticallyDownloadsUpdates = newValue }
+    }
+
     /// Starts Sparkle's scheduled checks, once. Debug builds skip them so working on PhinTechStore does not keep asking.
     func start() {
         #if !DEBUG

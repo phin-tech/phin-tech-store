@@ -73,3 +73,5 @@ targets:
         SUFeedURL: https://github.com/phin-tech/phin-tech-store/releases/latest/download/appcast.xml
         SUPublicEDKey: 2mirghhdXOaz0RtSlgkR5MOzQxF+QkubzK9tgq8eO8U=
         SUEnableAutomaticChecks: true
+        # Download and install updates without asking; they take effect at the next launch. Settings can turn it off.
+        SUAutomaticallyUpdate: true

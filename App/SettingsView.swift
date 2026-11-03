@@ -16,12 +16,15 @@ struct SettingsView: View {
                 Toggle("Check for updates automatically", isOn: Binding(
                     get: { UpdateChecker.shared.automaticChecks },
                     set: { UpdateChecker.shared.automaticChecks = $0 }))
+                Toggle("Download and install updates automatically", isOn: Binding(
+                    get: { UpdateChecker.shared.automaticDownloads },
+                    set: { UpdateChecker.shared.automaticDownloads = $0 }))
                 Toggle("Get beta versions", isOn: $betaUpdates)
                 Button("Check Now") { UpdateChecker.shared.checkForUpdates() }
             } header: {
                 Text("Updates")
             } footer: {
-                Text("Once a day, PhinTechStore asks GitHub for a newer release, and offers to install it and relaunch. "
+                Text("Once a day, Phin Tech Store asks GitHub for a newer release and installs it, so it's there the next time you open the store. "
                     + "Betas come out before a release and may have rough edges; when the release ships, you move on to it.")
                     .foregroundStyle(.secondary)
             }
