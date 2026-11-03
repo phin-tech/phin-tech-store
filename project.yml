@@ -67,6 +67,10 @@ targets:
       path: Generated/Info.plist
       properties:
         CFBundleShortVersionString: $(MARKETING_VERSION)
+        # phin-tech-bbs:// opens the Phin Tech BBS window (App/Views/BBSWindow.swift, BBSLinks).
+        CFBundleURLTypes:
+          - CFBundleURLName: tech.phin.store.bbs
+            CFBundleURLSchemes: [phin-tech-bbs]
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         # Sparkle: the appcast is an asset of the newest GitHub release (`just appcast` uploads it), and
         # updates must be signed by the private key in op://Development/lc6wrq7lltjd47uue26cdxttzu (sparkle_private_key).

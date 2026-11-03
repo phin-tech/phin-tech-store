@@ -7,6 +7,7 @@ struct PhinTechStoreApp: App {
     @StateObject private var store = StoreModel()
     @StateObject private var installer = Installer()
     @StateObject private var router = Router()
+    @NSApplicationDelegateAdaptor(BBSLinks.self) private var bbsLinks
 
     init() {
         Typeface.registerFonts()
@@ -20,6 +21,7 @@ struct PhinTechStoreApp: App {
             RootView(store: store, installer: installer, router: router)
                 .frame(minWidth: 960, minHeight: 680)
                 .onAppear { startUpdates() }
+                .background(BBSLinkOpener())
         }
         .defaultSize(width: 1180, height: 860)
         .commands {
@@ -28,6 +30,11 @@ struct PhinTechStoreApp: App {
             storeMenu
             helpMenu
         }
+        Window("Phin Tech BBS", id: "bbs") {
+            BBSWindow()
+                .frame(minWidth: 640, minHeight: 480)
+        }
+        .defaultSize(width: 980, height: 760)
         Settings {
             SettingsView()
         }
@@ -170,8 +177,11 @@ private struct ViewMenuItems: View {
 /// Help ▸ Call the Phin Tech Hotline (FaceTime or the iPhone place the call) and its web page.
 private struct HotlineMenuItems: View {
     @ObservedObject private var content = StoreContent.shared
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
+        Divider()
+        Button("Dial the Phin Tech BBS") { openWindow(id: "bbs") }
         if let line = content.hotline {
             Divider()
             Button("Call the Phin Tech Hotline: \(line.number)") { NSWorkspace.shared.open(line.dial) }
@@ -179,5 +189,40 @@ private struct HotlineMenuItems: View {
                 Button("Visit \(line.pageName ?? "the Hotline Page")") { NSWorkspace.shared.open(page) }
             }
         }
+    }
+}
+
+/// phin-tech-bbs:// links open the Phin Tech BBS window. The app delegate takes the URLs, so SwiftUI does not pick
+/// a window for them itself; it opens the BBS window with the openWindow action BBSLinkOpener hands over from the
+/// store window, or asks it to once it appears (a link that launched the app arrives first).
+@MainActor
+final class BBSLinks: NSObject, NSApplicationDelegate {
+    static let scheme = "phin-tech-bbs"
+    fileprivate static var openWindow: OpenWindowAction?
+    fileprivate static var pending = false
+
+    func application(_ application: NSApplication, open urls: [URL]) {
+        guard urls.contains(where: { $0.scheme == Self.scheme }) else { return }
+        if let openWindow = Self.openWindow {
+            openWindow(id: "bbs")
+        } else {
+            Self.pending = true
+        }
+    }
+}
+
+private struct BBSLinkOpener: View {
+    @Environment(\.openWindow) private var openWindow
+
+    var body: some View {
+        Color.clear
+            .frame(width: 0, height: 0)
+            .onAppear {
+                BBSLinks.openWindow = openWindow
+                if BBSLinks.pending {
+                    BBSLinks.pending = false
+                    openWindow(id: "bbs")
+                }
+            }
     }
 }
