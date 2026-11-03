@@ -309,10 +309,24 @@ private struct TwoColumns: View {
 private struct FinePrint: View {
     let app: StoreApp
     let text: String?
+    @ObservedObject private var content = StoreContent.shared
+
+    /// The ad's own fine print, then the call-your-dealer line, with the hotline as links.
+    private var words: AttributedString {
+        var dealer = "For the nearest authorized Phin Tech dealer, visit [apps.phin.tech](https://apps.phin.tech)."
+        if let line = content.hotline {
+            dealer = "For the nearest authorized Phin Tech dealer, call the hotline: [\(line.number)](\(line.dial.absoluteString))"
+                + (line.page.map { " or visit [\(line.pageName ?? $0.absoluteString)](\($0.absoluteString))" } ?? "") + "."
+        }
+        let year = Calendar.current.component(.year, from: Date())
+        let plain = [text.map { $0.replacingOccurrences(of: "[", with: "(").replacingOccurrences(of: "]", with: ")") },
+                     dealer, "© \(year) Phin Tech."].compactMap { $0 }.joined(separator: " ")
+        return (try? AttributedString(markdown: plain)) ?? AttributedString(plain)
+    }
 
     var body: some View {
-        Text([text, "For the nearest authorized Phin Tech dealer, visit apps.phin.tech. © \(Calendar.current.component(.year, from: Date())) Phin Tech."]
-            .compactMap { $0 }.joined(separator: " "))
+        Text(words)
+            .tint(Color.ink)
             .font(Typeface.garamond(10.5))
             .foregroundStyle(Color.ink.opacity(0.75))
             .frame(maxWidth: .infinity, alignment: .leading)

@@ -41,11 +41,16 @@ public struct ContentManifest: Codable, Sendable, Equatable {
     public var ads: [String: AdCopy]
     /// Keyed by the art's name, like `Dottie-box`.
     public var art: [String: ArtFile]
+    /// The Phin Tech hotline, like "+1 (833) 401-2219", and its web page.
+    public var hotline: String?
+    public var hotlineUrl: String?
 
     public static let base = URL(string: "https://apps.phin.tech/_store/")!
     public static var url: URL { base.appendingPathComponent("content.json") }
 
-    public init(ads: [String: AdCopy], art: [String: ArtFile]) { self.ads = ads; self.art = art }
+    public init(ads: [String: AdCopy], art: [String: ArtFile], hotline: String? = nil, hotlineUrl: String? = nil) {
+        self.ads = ads; self.art = art; self.hotline = hotline; self.hotlineUrl = hotlineUrl
+    }
 
     /// Where a downloaded copy of `name` is kept: its checksum is in the file name, so a changed picture is a new
     /// file and an unchanged one is never fetched twice.
@@ -53,4 +58,24 @@ public struct ContentManifest: Codable, Sendable, Equatable {
         let ext = (file.file as NSString).pathExtension
         return "\(name)-\(file.sha256.prefix(16)).\(ext.isEmpty ? "jpg" : ext)"
     }
+}
+
+/// The hotline as something to show and to dial: the number as written, a tel: link, and its web page.
+public struct Hotline: Sendable, Equatable {
+    public let number: String
+    public let dial: URL
+    public let page: URL?
+
+    /// Nil unless `number` looks like a phone number; `page` is kept only if it is https.
+    public init?(number: String?, page: String?) {
+        guard let number = number?.trimmingCharacters(in: .whitespaces), number.count >= 7,
+              number.allSatisfy({ $0.isNumber || " +()-.".contains($0) }),
+              let dial = URL(string: "tel:" + number.filter { $0.isNumber || $0 == "+" }) else { return nil }
+        self.number = number
+        self.dial = dial
+        self.page = page.flatMap(URL.init(string:)).flatMap { $0.scheme == "https" ? $0 : nil }
+    }
+
+    /// "hotline.phin.tech", for showing the page.
+    public var pageName: String? { page?.host() }
 }

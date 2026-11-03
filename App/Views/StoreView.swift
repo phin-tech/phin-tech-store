@@ -131,6 +131,7 @@ struct StoreSign: View {
                 Text("Fine software for the personal computer · Free for the asking")
                     .font(Typeface.garamond(18, "Italic"))
                     .foregroundStyle(Color.paper.opacity(0.9))
+                HotlineLine()
             }
             .padding(.horizontal, 34)
             .padding(.vertical, 18)
@@ -254,5 +255,31 @@ private struct Screw: View {
     var body: some View {
         Circle().fill(Color(hex: "#7A5A20")).frame(width: 4, height: 4)
             .overlay(Rectangle().fill(.black.opacity(0.5)).frame(width: 3, height: 0.7))
+    }
+}
+
+/// "The Phin Tech Hotline: +1 (833) 401-2219 · hotline.phin.tech", in brass under the sign's subtitle.
+struct HotlineLine: View {
+    @ObservedObject private var content = StoreContent.shared
+
+    var body: some View {
+        if let line = content.hotline {
+            HStack(spacing: 8) {
+                Text("THE PHIN TECH HOTLINE")
+                    .font(.custom("Futura-Bold", fixedSize: 10)).tracking(1.8)
+                    .foregroundStyle(Color.brass)
+                Link(line.number, destination: line.dial)
+                    .font(.custom("Futura-Bold", fixedSize: 13)).tracking(1)
+                    .help("Call the hotline")
+                if let page = line.page, let name = line.pageName {
+                    Text("·").foregroundStyle(Color.brass)
+                    Link(name, destination: page)
+                        .font(.custom("Futura-Bold", fixedSize: 13)).tracking(1)
+                }
+            }
+            .foregroundStyle(Color(hex: "#F7E3A3"))
+            .tint(Color(hex: "#F7E3A3"))
+            .padding(.top, 4)
+        }
     }
 }

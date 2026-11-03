@@ -2,7 +2,7 @@
 """Publish the store's ad copy and per-app art to the download page, so the store shows a new or changed ad
 without a new release of the store.
 
-Reads content/ads.json, content/promo.json and content/art/, and uploads to the phin-apps R2 bucket (served at
+Reads content/ads.json, content/promo.json, content/store.json (the hotline) and content/art/, and uploads to the phin-apps R2 bucket (served at
 https://apps.phin.tech): the pictures whose checksum changed go to _store/art/, the shop's own pictures and fonts (for
 the download page, which app-release draws as the shop) to _store/site/, then _store/content.json, which lists the ads,
 the first-visit promo and every file's SHA-256. The store app reads it on launch and on Reload and downloads only
@@ -71,6 +71,8 @@ def main() -> None:
             art[path.stem] = {"file": f"art/{path.name}", "sha256": sha256(path), "_path": path}
 
     site = {name: {"file": f"site/{name}", "sha256": sha256(path), "_path": path} for name, path in SITE.items()}
+    store_path = CONTENT / "store.json"  # the shop's own details: the hotline and its page
+    extra = json.loads(store_path.read_text()) if store_path.exists() else {}
     promo_path = CONTENT / "promo.json"
     promo = json.loads(promo_path.read_text()) if promo_path.exists() else None
 
@@ -82,7 +84,7 @@ def main() -> None:
         put(f"{PREFIX}/{f['file']}", f["_path"], TYPES[f["_path"].suffix.lower()], a.dry_run)
 
     strip = lambda files: {n: {"file": f["file"], "sha256": f["sha256"]} for n, f in files.items()}
-    manifest = {"ads": ads, "art": strip(art), "site": strip(site)}
+    manifest = {**extra, "ads": ads, "art": strip(art), "site": strip(site)}
     if promo:
         manifest["promo"] = promo
     out = ROOT / "build" / "content.json"

@@ -16,6 +16,7 @@ final class StoreContent: ObservableObject {
     @Published private(set) var revision = 0
 
     private let bundled: [String: AdCopy]
+    private let bundledStore: [String: String]
     private var images: [String: NSImage] = [:]
     private var fetching = false
     private let fm = FileManager.default
@@ -31,9 +32,17 @@ final class StoreContent: ObservableObject {
         let url = Bundle.main.url(forResource: "ads", withExtension: "json", subdirectory: "content")
         bundled = url.flatMap { try? Data(contentsOf: $0) }
             .flatMap { try? JSONDecoder().decode([String: AdCopy].self, from: $0) } ?? [:]
+        bundledStore = Bundle.main.url(forResource: "store", withExtension: "json", subdirectory: "content")
+            .flatMap { try? Data(contentsOf: $0) }
+            .flatMap { try? JSONDecoder().decode([String: String].self, from: $0) } ?? [:]
         let cached = (try? Data(contentsOf: Self.manifestCache))
             .flatMap { try? JSONDecoder().decode(ContentManifest.self, from: $0) }
         manifest = cached ?? ContentManifest(ads: [:], art: [:])
+    }
+
+    /// The hotline, from apps.phin.tech or else as the store was built with it.
+    var hotline: Hotline? {
+        Hotline(number: manifest.hotline ?? bundledStore["hotline"], page: manifest.hotlineUrl ?? bundledStore["hotlineUrl"])
     }
 
     func ad(for app: StoreApp) -> AdCopy {

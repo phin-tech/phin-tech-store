@@ -71,6 +71,7 @@ struct PhinTechStoreApp: App {
         CommandGroup(replacing: .help) {
             Button("Phin Tech Store Help") { NSWorkspace.shared.open(URL(string: "https://github.com/phin-tech/phin-tech-store#readme")!) }
             Button("Visit apps.phin.tech") { NSWorkspace.shared.open(StoreApp.site) }
+            HotlineMenuItems()
         }
     }
 }
@@ -161,5 +162,20 @@ private struct ViewMenuItems: View {
         }
             .keyboardShortcut("r")
         Divider()
+    }
+}
+
+/// Help ▸ Call the Phin Tech Hotline (FaceTime or the iPhone place the call) and its web page.
+private struct HotlineMenuItems: View {
+    @ObservedObject private var content = StoreContent.shared
+
+    var body: some View {
+        if let line = content.hotline {
+            Divider()
+            Button("Call the Phin Tech Hotline: \(line.number)") { NSWorkspace.shared.open(line.dial) }
+            if let page = line.page {
+                Button("Visit \(line.pageName ?? "the Hotline Page")") { NSWorkspace.shared.open(page) }
+            }
+        }
     }
 }

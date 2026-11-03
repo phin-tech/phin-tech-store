@@ -39,3 +39,17 @@ private func app(_ id: String) throws -> StoreApp {
     #expect(ad.headline == "Newcomer.")
     #expect(ad.sections.first?.body == "About Newcomer")
 }
+
+@Test func hotlineDialsTheDigitsAndKeepsOnlyAnHttpsPage() throws {
+    let line = try #require(Hotline(number: "+1 (833) 401-2219", page: "https://hotline.phin.tech/"))
+    #expect(line.dial.absoluteString == "tel:+18334012219")
+    #expect(line.pageName == "hotline.phin.tech")
+    #expect(Hotline(number: "+1 (833) 401-2219", page: "javascript:alert(1)")?.page == nil)
+    #expect(Hotline(number: "call me", page: nil) == nil)
+    #expect(Hotline(number: nil, page: nil) == nil)
+}
+
+@Test func anOlderManifestWithoutAHotlineStillDecodes() throws {
+    let m = try JSONDecoder().decode(ContentManifest.self, from: #"{"ads": {}, "art": {}}"#.data(using: .utf8)!)
+    #expect(m.hotline == nil && m.hotlineUrl == nil)
+}
