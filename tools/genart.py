@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate every image in art/prompts.json that is missing from art/raw, in parallel,
-then write a resized JPEG of each into App/Resources/Art.
+then write a resized JPEG of each: per-app art into content/art, shared art into App/Resources/Art.
 
 Usage: tools/genart.py [name ...]   (names force a regenerate of just those)
 """
@@ -9,7 +9,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW = os.path.join(ROOT, "art", "raw")
-OUT = os.path.join(ROOT, "App", "Resources", "Art")
+SHARED = os.path.join(ROOT, "App", "Resources", "Art")   # the wood, the shop: bundled only
+PER_APP = os.path.join(ROOT, "content", "art")             # <id>-box, <id>-hero: published by `just publish-content`
 
 def run(img, styles, force):
     raw = os.path.join(RAW, img["name"] + ".png")
@@ -19,14 +20,15 @@ def run(img, styles, force):
                             "--aspect", img["aspect"]], capture_output=True, text=True)
         if r.returncode:
             return f"FAIL {img['name']}: {r.stderr.strip()[-400:]}"
-    jpg = os.path.join(OUT, img["name"] + ".jpg")
+    out = PER_APP if img["name"].endswith(("-box", "-hero")) else SHARED
+    jpg = os.path.join(out, img["name"] + ".jpg")
     subprocess.run(["sips", "-s", "format", "jpeg", "-s", "formatOptions", "82", "-Z", "1600", raw, "--out", jpg],
                    check=True, capture_output=True)
     return f"ok {img['name']}"
 
 def main():
     spec = json.load(open(os.path.join(ROOT, "art", "prompts.json")))
-    os.makedirs(RAW, exist_ok=True); os.makedirs(OUT, exist_ok=True)
+    os.makedirs(RAW, exist_ok=True); os.makedirs(SHARED, exist_ok=True); os.makedirs(PER_APP, exist_ok=True)
     only = set(sys.argv[1:])
     imgs = [i for i in spec["images"] if not only or i["name"] in only]
     if os.environ.get("OPENROUTER_API_KEY") is None:

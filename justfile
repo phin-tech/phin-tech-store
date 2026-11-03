@@ -33,6 +33,10 @@ debug-app *files: build
 debug *args:
     @scripts/debug.py "$@"
 
+# Publish ad copy and per-app art (content/) to apps.phin.tech, where the store reads it: no store release needed
+publish-content *args:
+    tools/publish-content.py {{args}}
+
 # Remove build artifacts and the generated Xcode project
 clean:
     rm -rf .build DerivedData PhinTechStore.xcodeproj

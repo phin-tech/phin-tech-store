@@ -5,6 +5,7 @@ import SwiftUI
 struct AdPageView: View {
     let app: StoreApp
     @ObservedObject var installer: Installer
+    @ObservedObject private var content = StoreContent.shared
 
     private var copy: AdCopy { AdCopy.for(app) }
     private let pageWidth: CGFloat = 820
@@ -133,6 +134,7 @@ private struct BodyCopy: View {
 
 private struct Hero: View {
     let app: StoreApp
+    @ObservedObject private var content = StoreContent.shared
     var aspect: CGFloat = 4 / 3
 
     var body: some View {
@@ -240,7 +242,7 @@ private struct ColumnsAd: View {
                     Wordmark(size: 40)
                     Text("THE PHIN TECH SOFTWARE STORE")
                         .font(.custom("Futura-Bold", fixedSize: 9)).tracking(1.5)
-                    Text("CIRCLE \(abs(app.id.hashValue) % 90 + 10)")
+                    Text("CIRCLE \(app.id.unicodeScalars.reduce(0) { ($0 + Int($1.value)) % 90 } + 10)")
                         .font(.custom("Futura-Medium", fixedSize: 9)).tracking(1.5)
                 }
                 .foregroundStyle(Color.ink)

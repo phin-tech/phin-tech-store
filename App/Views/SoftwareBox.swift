@@ -10,6 +10,7 @@ struct SoftwareBox: View {
     var width: CGFloat = 168
 
     @State private var hovering = false
+    @ObservedObject private var content = StoreContent.shared
 
     private var copy: AdCopy { AdCopy.for(app) }
     private var color: Color { Color(hex: copy.boxColor) }

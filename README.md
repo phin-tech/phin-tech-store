@@ -41,14 +41,20 @@ See [DEVELOPMENT.md](DEVELOPMENT.md).
 ### Adding an app
 
 An app published to apps.phin.tech shows up on its own, with a plain ad made from its
-description. To give it a real ad:
+description. To give it a real ad, no release of the store needed:
 
-1. Write its copy in `App/Resources/Ads.json`, keyed by its apps.json id: a layout
+1. Write its copy in `content/ads.json`, keyed by its apps.json id: a layout
    (`classic`, `photo`, `columns` or `product`), a box colour, a headline, sections, a
    tagline and fine print.
-2. Add a `<id>-hero` and a `<id>-box` prompt to `art/prompts.json`, then run
+2. Add a `<id>-hero` and a `<id>-box` prompt to `art/prompts.json` and run
    `tools/genart.py <id>-hero <id>-box`. It renders them with an image model on
-   OpenRouter (the key is read from 1Password) and writes JPEGs to
-   `App/Resources/Art`.
+   OpenRouter (the key is read from 1Password) into `content/art`.
+3. `just publish-content` uploads the changed pictures and `content.json` to
+   `apps.phin.tech/_store/` (with `cf`, like `just ship`). Stores pick it up the next
+   time they open, or on **View ▸ Reload the Shelves** (⌘R), and download only the
+   pictures they don't have.
+
+What's in `content/` when the store is built ships inside it too, for when it can't reach
+apps.phin.tech.
 
 Fonts: EB Garamond (SIL Open Font License, `App/Resources/Fonts/OFL.txt`).

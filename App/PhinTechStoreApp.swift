@@ -151,7 +151,14 @@ private struct ViewMenuItems: View {
             .keyboardShortcut("[")
             .disabled(router.path.isEmpty)
         Divider()
-        Button("Reload the Shelves") { Task { await store.reload(); installer.refresh(store.apps) } }
+        Button("Reload the Shelves") {
+            Task {
+                async let content: Void = StoreContent.shared.refresh()
+                await store.reload()
+                installer.refresh(store.apps)
+                await content
+            }
+        }
             .keyboardShortcut("r")
         Divider()
     }

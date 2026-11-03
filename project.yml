@@ -35,6 +35,10 @@ targets:
       - path: App/Resources/Fonts
         type: folder
         buildPhase: resources
+      # Ad copy and per-app art, as of this build: the fallback for _store/content.json on apps.phin.tech.
+      - path: content
+        type: folder
+        buildPhase: resources
     # A shared scheme, generated every time: without one, Xcode can remember a scheme that a regenerate
     # removed and then show no way to build or archive the app.
     scheme: {}

@@ -51,8 +51,10 @@ struct RootView: View {
         }
         .task {
             installer.refresh(store.apps)
+            async let content: Void = StoreContent.shared.refresh()
             await store.reload()
             installer.refresh(store.apps)
+            await content
         }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             installer.refresh(store.apps)
