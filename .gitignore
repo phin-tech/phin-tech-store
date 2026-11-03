@@ -1,0 +1,14 @@
+.build/
+.swiftpm/
+*.xcodeproj
+DerivedData/
+.DS_Store
+Signing.local.xcconfig
+build/
+# Info.plists and entitlements, which xcodegen writes from project.yml
+Generated/
+# Raw image-model output; the resized copies the app uses are in App/Resources/Art
+art/raw/
+# Logo and icon drafts; the chosen ones are in App/Resources/Art, App/Assets.xcassets and docs/
+art/logos/*.png
+art/icon/*.png

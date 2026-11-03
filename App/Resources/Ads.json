@@ -1,0 +1,209 @@
+{
+  "Dottie": {
+    "layout": "photo",
+    "boxColor": "#1F6F78",
+    "headline": "Draw it by hand. Without lifting a pencil.",
+    "kicker": "Introducing Dottie.",
+    "sections": [
+      {
+        "body": "Every good idea starts on the back of a napkin. A few boxes. A few arrows. A circle around the part that matters. Dottie keeps that feeling, and puts it on your Mac."
+      },
+      {
+        "heading": "Sketch first. Tidy later.",
+        "body": "Draw a flowchart, a system diagram or a whiteboard idea in seconds, in a style that looks like you drew it. When it is headed for a document, switch to a clean, precise look with one click. Same diagram. Better posture."
+      },
+      {
+        "heading": "It takes dictation.",
+        "body": "Dottie speaks MCP, the language AI assistants use to work with your applications. Ask Claude to draw your deployment pipeline from left to right, then ask it to add a staging step. Then watch the shapes appear, as if someone were standing at the whiteboard for you."
+      },
+      {
+        "body": "Dottie keeps itself up to date, and runs on macOS 14 Sonoma or later. Visit the Phin Tech Store and take one home today."
+      }
+    ],
+    "tagline": "The diagram that draws itself.",
+    "finePrint": "Dottie works with Claude and other assistants that support the Model Context Protocol. Pencils sold separately. Not really."
+  },
+  "Fanfare": {
+    "layout": "product",
+    "boxColor": "#5B3F8C",
+    "headline": "Take home a terminal. Pinstripes included.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "All along, we've been telling you a terminal can be beautiful. Now we're going to prove it."
+      },
+      {
+        "body": "Every Fanfare window is drawn the way Mac OS 8.5 and 9 drew one. A black outline. A pinstriped title bar with a close box, a zoom box and a WindowShade box. A Platinum scroll bar with a proportional thumb. A grow box in the corner, right where you left it."
+      },
+      {
+        "body": "Choose an appearance. Platinum. Copland's Hi-Tech, Gizmo and Drawing Board. System 7 Classic. One-bit Monochrome. Green-screen Phosphor. BeOS, OS/2 Warp, Windows 3.1 and 95, the Amiga's Workbench and Sun's OPEN LOOK."
+      },
+      {
+        "body": "Inside, it is all business: a modern Ghostty terminal, in Monaco 9, in the Mac's own 16 colours. It just knows how to make an entrance."
+      },
+      {
+        "body": "The hard part is closing the window."
+      }
+    ],
+    "tagline": "Fanfare for the Common Terminal.",
+    "finePrint": "Fanfare is not affiliated with any of the operating systems it admires. Trumpet not included."
+  },
+  "Microfiche": {
+    "layout": "classic",
+    "boxColor": "#8C4A1F",
+    "headline": "Pepper has a lot going on.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Walks. Naps. A standing appointment with the mail carrier. A long-term plan concerning the sausage on the top shelf."
+      },
+      {
+        "body": "Pepper keeps it all in Microfiche, a modal outliner for notes with tasks mixed right in. Every note is a plain-text .fiche file you can keep forever, read anywhere and never lose to a format nobody remembers."
+      },
+      {
+        "body": "What if a task belongs in a different note?"
+      },
+      {
+        "body": "What if the sausage belongs at the top?"
+      },
+      {
+        "body": "Press m to pick up an item, step it to where it should go and press enter. Send it to another note with a keystroke, and both are saved. Jump between headings. Find any command, note or task with the Launcher. Catch a passing thought from anywhere with a global hotkey."
+      },
+      {
+        "body": "It moves like Vim, so your fingers never leave home row. Neither does Pepper, if he can help it."
+      },
+      {
+        "body": "Visit the Phin Tech Store and see how a well-organized dog lives."
+      }
+    ],
+    "tagline": "The personal outliner.",
+    "finePrint": "Pepper's own notebook ships with Microfiche as a sample. No dogs were reorganized against their will."
+  },
+  "TwistedPair": {
+    "layout": "columns",
+    "boxColor": "#C2410C",
+    "headline": "Your team has always had good help. Now it can join the meeting.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Every team has the same problem: the people who know things and the tools that do things never seem to be in the same room. Twisted Pair puts them at the same table."
+      },
+      {
+        "heading": "Bots are Members, too.",
+        "body": "Websocket agents, Elixir Extensions and sandboxed Lua Plugins join as Members, under the same access rule and token Scopes as everyone else. No back door. No special treatment. Just one more colleague who never misses a thread."
+      },
+      {
+        "heading": "Threads with titles.",
+        "body": "All the ease of a chat room, all the findability of a filing cabinet. Threads can be followed, resolved, forked or promoted to a channel of their own. A channel can even be a forum."
+      },
+      {
+        "heading": "Access by Passes.",
+        "body": "One rule covers invitations, departments and identity-provider groups. Who can see what is never a mystery."
+      },
+      {
+        "heading": "Open, all the way down.",
+        "body": "Apache-2.0. A published protocol. A server you host yourself and a native desktop client built for speed. Your conversations stay yours."
+      }
+    ],
+    "tagline": "Chat for people and agents.",
+    "finePrint": "Twisted Pair is self-hosted. The server is Elixir; the desktop client is native Rust on GPUI. Cables not to scale."
+  },
+  "rabbit-ears-manager": {
+    "layout": "photo",
+    "boxColor": "#2B4C8C",
+    "headline": "Tonight, the weather is on Channel 1. And so is everything else.",
+    "kicker": "Introducing Rabbit Ears Manager.",
+    "sections": [
+      {
+        "body": "Rabbit Ears is a television station of your very own, for every Apple TV, Mac and iPad in the house. Channel 1 is the local forecast, every eight minutes, just the way you remember it."
+      },
+      {
+        "heading": "You're the station manager.",
+        "body": "Rabbit Ears Manager sets the whole station up from your Mac. Arrange the channels. Sign in to your IPTV providers. Pick the sports. Connect Plex. Configure the relay, so the screens away from home still get the signal."
+      },
+      {
+        "body": "Make a change once, and Antenna Tower sends it to every screen. Even if the Mac mini takes the night off, each screen keeps its own copy and keeps on playing."
+      },
+      {
+        "body": "Antenna adjustment not required."
+      }
+    ],
+    "tagline": "Station management, from your desk.",
+    "finePrint": "Requires a Rabbit Ears station. Live TV comes straight from your IPTV providers to each screen. Wood-grain console sold separately."
+  },
+  "jeo-paw-dy-player": {
+    "layout": "classic",
+    "boxColor": "#1D4ED8",
+    "headline": "The answer is: game night.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "What is the most fun your living room has had in years?"
+      },
+      {
+        "body": "Jeo-paw-dy is a home trivia game show with a late-90s look, hosted by Pepper. The board is on the television. Your phone is the buzzer. An AI judge rules on every answer, and when it isn't sure, the room takes a vote."
+      },
+      {
+        "body": "Jeo-paw-dy Player lets you join a game that someone else is hosting, right from your Mac. Buzz in. Type your answer, or say it out loud. Argue with the judge. Lose gracefully to a dog."
+      },
+      {
+        "body": "There are no clues inside, so nobody gets to peek. Not even Pepper."
+      }
+    ],
+    "tagline": "Please phrase your answer in the form of a question.",
+    "finePrint": "Jeo-paw-dy Player needs a game hosted on your network. Contains no clue data. Popcorn sold separately."
+  },
+  "herdr-phin-util": {
+    "layout": "columns",
+    "boxColor": "#3F6212",
+    "headline": "One keystroke. Every project, right where you left it.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Herdr already keeps your terminals in line. Phin Util teaches it a few new tricks."
+      },
+      {
+        "heading": "Get there in one keystroke.",
+        "body": "Open a repository, a branch or a pull request without typing a path. Phin Util finds it, clones it if it has to, and puts you in the right directory."
+      },
+      {
+        "heading": "Rooms, ready when you are.",
+        "body": "Lay out a room once, with the panes, the commands and the windows just so. Then call it up whole, every time."
+      },
+      {
+        "heading": "No Go required.",
+        "body": "Install it with Herdr's plugin command, or unzip the package and link it. The binaries for macOS and Linux are already inside, checked and ready."
+      }
+    ],
+    "tagline": "Utilities for the well-kept herd.",
+    "finePrint": "Requires Herdr 0.7.4 or later, git, and an authenticated gh. Built for its author; actions may change between versions."
+  },
+  "Slaps": {
+    "layout": "product",
+    "boxColor": "#B91C1C",
+    "headline": "You were going to be late. Now you won't.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "A little notification in the corner is easy to miss. A whole screen is not."
+      },
+      {
+        "body": "A minute before your meeting, or however long you choose, Slaps covers every screen you own, in every Space and over full-screen apps, with the meeting's title, a countdown and a Join button for its call."
+      },
+      {
+        "body": "Press Return to join. Press Escape to dismiss. Snooze for a minute, for five, or until it starts."
+      },
+      {
+        "body": "Prefer a gentler reminder? Choose a banner across the top or bottom of each screen. It won't take the keyboard from whatever you're typing."
+      },
+      {
+        "body": "Slaps reads the calendars you already keep in Calendar, and finds the Zoom, Meet, Teams, Webex or FaceTime link for you."
+      },
+      {
+        "body": "The hard part is pretending you didn't see it."
+      }
+    ],
+    "tagline": "Never miss a meeting again.",
+    "finePrint": "Slaps works with every calendar in the macOS Calendar app. Coffee spills are the user's responsibility."
+  }
+}

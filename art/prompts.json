@@ -1,0 +1,123 @@
+{
+  "styles": {
+    "hero": "A 1980s print magazine advertisement photograph, shot on Kodachrome 64 with a medium-format camera, warm tungsten and window light, visible film grain, gentle softness, period-accurate wardrobe and interiors. Any computer is a generic beige early-1980s personal computer with no brand markings. Absolutely no text, letters, numbers, logos or watermarks anywhere in the image. Scene: ",
+    "box": "Front cover illustration for a boxed 1990s Macintosh software package, painted in airbrush and gouache with bold geometric shapes, a deep gradient sky and crisp highlights, like premium software box art of 1993. The painting is full-bleed: it fills the entire frame to every edge, with no border, no margin, no white space and no frame. Absolutely no text, letters, numbers, logos or watermarks. Subject: ",
+    "plain": ""
+  },
+  "images": [
+    {
+      "name": "wood-shelf",
+      "style": "plain",
+      "aspect": "21:9",
+      "prompt": "Seamless tileable texture of rich polished walnut wood, horizontal grain running left to right, warm honey and chocolate tones, subtle varnish sheen, evenly lit, flat straight-on photograph, no objects, no text."
+    },
+    {
+      "name": "wood-wall",
+      "style": "plain",
+      "aspect": "16:9",
+      "prompt": "Seamless texture of dark stained oak tongue-and-groove wall paneling, vertical boards with fine grooves between them, warm low light from above, 1980s den, flat straight-on photograph, no objects, no text."
+    },
+    {
+      "name": "store-front",
+      "style": "hero",
+      "aspect": "21:9",
+      "prompt": "the inside of a cozy small-town computer software store in 1985, warm wooden shelves lined with colorful boxed software seen slightly out of focus, a beige computer on a wooden counter, brass lamp glow, green carpet, a feeling of a well-loved library. No readable writing on any box."
+    },
+    {
+      "name": "Dottie-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a woman architect in a cream blouse and large glasses at a wooden drafting table by a sunny window, a beige computer beside her whose green-phosphor screen shows a loose hand-drawn flowchart of boxes and arrows, pencils, a coffee mug and rolled blueprints on the desk, she is smiling at the screen."
+    },
+    {
+      "name": "Dottie-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a giant friendly pencil drawing a wobbly hand-sketched flowchart of boxes and arrows across a starry teal and coral sky, the arrows glowing as they connect."
+    },
+    {
+      "name": "Fanfare-hero",
+      "style": "hero",
+      "aspect": "3:4",
+      "prompt": "a tall all-in-one beige computer on a plain warm grey studio sweep, lit like a product shot, its small black-and-white screen showing a grey pinstriped window with lines of text-like squiggles, a keyboard and a single-button mouse in front of it, a polished brass trumpet resting beside the keyboard."
+    },
+    {
+      "name": "Fanfare-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a golden trumpet blowing a bright rainbow stream of glowing blocky shapes out of a grey retro computer window with a striped title bar, against a deep violet sky with spotlights."
+    },
+    {
+      "name": "Microfiche-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a scruffy brown-and-white terrier dog sitting upright on a wooden office chair at a desk, looking proudly at a beige computer, surrounded by neat stacks of index cards, a card file drawer, a rubber stamp and a leather notebook, warm library light."
+    },
+    {
+      "name": "Microfiche-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a cascade of glowing index cards and checkboxes unfolding like an outline from a tiny dog's notebook, nested indented cards floating above a wooden card catalog drawer, against a midnight blue and amber sky."
+    },
+    {
+      "name": "TwistedPair-hero",
+      "style": "hero",
+      "aspect": "16:9",
+      "prompt": "a lively open-plan 1980s office meeting around a long wooden table, four colleagues in sweaters and shirtsleeves laughing together, two beige computers on the table with glowing screens, coiled telephone cables twisting across the table, a friendly small toy robot sitting at the table as if it were a colleague."
+    },
+    {
+      "name": "TwistedPair-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "two glowing cables, one orange and one blue, twisting around each other in a double helix that rises from a desk telephone, little speech-bubble shapes and a cheerful small robot riding along the cable, against a dusk gradient sky."
+    },
+    {
+      "name": "rabbit-ears-manager-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a 1980s wood-paneled living room in the evening, a family on a plaid sofa watching a big wood-grain console television topped with silver rabbit-ear antennas, the screen showing a blue weather map with sun and cloud symbols, a father at a nearby desk adjusting things on a beige computer."
+    },
+    {
+      "name": "rabbit-ears-manager-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a chrome rabbit-ear television antenna atop a wood-grain TV set, beaming colorful broadcast waves into a sky full of weather symbols, satellites and channel tiles, against a deep blue and orange sunset."
+    },
+    {
+      "name": "jeo-paw-dy-player-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a 1990s family game night in a bright living room, a happy scruffy terrier dog sitting on the sofa between laughing teenagers, one teen holding up a phone-sized handheld buzzer, a television in the background showing a grid of bright blue tiles, bowls of popcorn."
+    },
+    {
+      "name": "jeo-paw-dy-player-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a cheerful scruffy terrier dog in a tiny bow tie hosting a game show, standing before a glowing grid of blue tiles, confetti and Memphis-style squiggles, triangles and dots in teal, magenta and yellow."
+    },
+    {
+      "name": "herdr-phin-util-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a calm sheepdog lying beside an engineer in a denim shirt at a wooden desk late at night, the engineer pressing one key on a beige keyboard, the green-phosphor screen split into several neat tiled panes, a desk lamp glowing, a window showing a moonlit field."
+    },
+    {
+      "name": "herdr-phin-util-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a sheepdog herding a flock of glowing terminal windows into a tidy grid of panes across a moonlit green hillside, a starry indigo sky."
+    },
+    {
+      "name": "Slaps-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a startled businessman in a brown suit and wide tie at a cluttered office desk, leaning back in surprise with his coffee mid-air, as the beige computer's whole screen flashes bright red and yellow with a big alarm-clock shape, a wall clock behind him showing one minute to the hour, sunlight through venetian blinds."
+    },
+    {
+      "name": "Slaps-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a giant cartoon alarm clock bursting through a computer screen in a starburst of red and yellow, little calendar pages and a telephone flying out, bold comic-style action lines against a hot pink and orange sky."
+    }
+  ]
+}
