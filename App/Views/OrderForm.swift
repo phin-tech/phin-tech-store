@@ -27,9 +27,14 @@ struct OrderForm: View {
             HStack(alignment: .top, spacing: 26) {
                 VStack(alignment: .leading, spacing: 6) {
                     field("Product", app.title)
-                    field("Version", release.map { "v" + $0.version } ?? "—", menu: app.releases.count > 1)
-                    field("Released", release.map { longDate($0.date) } ?? "—")
-                    field("Size", release.map { ByteCountFormatter.string(fromByteCount: $0.size, countStyle: .file) } ?? "—")
+                    if app.isListing {
+                        field("Version", "Latest")
+                        field("Delivery", "Source code")
+                    } else {
+                        field("Version", release.map { "v" + $0.version } ?? "—", menu: app.releases.count > 1)
+                        field("Released", release.map { longDate($0.date) } ?? "—")
+                        field("Size", release.map { ByteCountFormatter.string(fromByteCount: $0.size, countStyle: .file) } ?? "—")
+                    }
                     field("Price", "FREE")
                     if let sha = release?.sha256 {
                         field("Checksum", String(sha.prefix(16)) + "…", mono: true)
@@ -75,6 +80,15 @@ struct OrderForm: View {
     // MARK: - Pieces
 
     @ViewBuilder private var action: some View {
+        if app.isListing, let source = app.source {
+            Button("Get the Source") { NSWorkspace.shared.open(source) }
+                .buttonStyle(RetroButtonStyle(prominent: true))
+        } else {
+            installAction
+        }
+    }
+
+    @ViewBuilder private var installAction: some View {
         switch state {
         case .downloading(let p):
             VStack(alignment: .leading, spacing: 6) {

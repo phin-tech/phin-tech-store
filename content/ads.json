@@ -106,7 +106,7 @@
       }
     ],
     "tagline": "Chat for people and agents.",
-    "finePrint": "Twisted Pair is self-hosted. The server is Elixir; the desktop client is native Rust on GPUI. Cables not to scale."
+    "finePrint": "Twisted Pair needs a Twisted Pair Server, which you host yourself: find it on the Servers shelf, also free. The desktop client is native Rust on GPUI. Cables not to scale."
   },
   "rabbit-ears-manager": {
     "layout": "photo",
@@ -231,5 +231,70 @@
     ],
     "tagline": "Pepper never forgets.",
     "finePrint": "The Phin Tech Store runs on macOS 14 Sonoma or later. Walnut shelving not included with every Mac."
+  },
+  "Welty": {
+    "layout": "classic",
+    "boxColor": "#2F5D50",
+    "headline": "Remember when you checked your mail, and then you were done?",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Once, mail was a program on your own computer. It came when you asked, it stayed where you put it, and nobody else had a say in how it looked."
+      },
+      {
+        "body": "Welty brings that back for your Fastmail and Gmail accounts. Your mail is kept in a database on your Mac, so it opens at once and reads just as well on an airplane. File it, flag it or archive it offline, and Welty makes the changes as soon as you're connected again."
+      },
+      {
+        "heading": "Two looks. One mail program.",
+        "body": "Choose Classic, with windows straight out of a 1999 desktop, or Modern, with today's controls. Both have the same features and the same keys."
+      },
+      {
+        "heading": "Your hands never leave the keyboard.",
+        "body": "Use Gmail's keys or Vim's: j and k to move, x to check a message, v to check a run of them, g and a letter to change mailboxes. Archived the wrong thing? Take it back before Welty has even sent the change."
+      },
+      {
+        "heading": "Unsubscribe with one keystroke.",
+        "body": "Welty finds the unsubscribe link in each newsletter, and where the sender allows it, unsubscribes without opening a page."
+      },
+      {
+        "heading": "Help is standing by.",
+        "body": "An AI agent can read your mail through Welty, file it, and draft your replies. Each draft opens in a window for you to finish. Welty only sends mail when you click Send."
+      },
+      {
+        "body": "Dark mode, too. Mail that wasn't made for it is darkened, and a company's blue stays blue."
+      }
+    ],
+    "tagline": "Mail, the way you remember it.",
+    "finePrint": "Welty works with Fastmail and Gmail accounts and runs on macOS 14 Sonoma or later. Stamps not required."
+  },
+  "TwistedPairServer": {
+    "title": "Twisted Pair Server",
+    "layout": "product",
+    "boxColor": "#3F3A36",
+    "headline": "Every good conversation needs a room. This is the building.",
+    "kicker": "Introducing Twisted Pair Server.",
+    "sections": [
+      {
+        "body": "Twisted Pair Server is where your team's conversations live: every Channel, every Thread, every Member and every Bot, on a computer you choose, under a roof you own."
+      },
+      {
+        "heading": "A workgroup in a box.",
+        "body": "The server and its Postgres database come together, and start with a single docker compose command. Choose a password and two secrets, start it, and sign in as the first administrator. Then make a one-time link for each new Member from the Admin row. Each person chooses their own password."
+      },
+      {
+        "heading": "No per-seat licenses.",
+        "body": "Twisted Pair is Apache-2.0. Bring the whole department, and their robots, too. Bots join as Members, under the same Passes and token Scopes as everyone else."
+      },
+      {
+        "heading": "Plugins included.",
+        "body": "With the GitHub Plugin, every pull request becomes a titled Thread, with a live card that follows CI and deploys and a Take Review button. The Thread resolves itself on merge."
+      },
+      {
+        "heading": "System requirements.",
+        "body": "Any Mac or Linux computer that runs Docker. Postgres 17 is included. For Members outside the office, a TLS proxy or a Cloudflare Tunnel."
+      }
+    ],
+    "tagline": "The server for Twisted Pair.",
+    "finePrint": "Twisted Pair Server needs Twisted Pair, the desktop client, which is sold separately (also free). Server closet not included."
   }
 }

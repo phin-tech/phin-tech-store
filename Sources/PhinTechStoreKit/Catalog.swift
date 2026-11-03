@@ -38,8 +38,21 @@ public struct StoreApp: Identifiable, Hashable, Sendable {
 
     public var latest: CatalogFile.Release? { releases.first }
     public var isMacApp: Bool { category == StoreApp.macApps }
+    /// On the shelves for its code alone: nothing to download, only a repository to get it from (a server, say).
+    public var isListing: Bool { releases.isEmpty && source != nil }
+
+    /// What the foot of its box says it runs on.
+    public var platform: String {
+        switch category {
+        case StoreApp.macApps: "for macOS"
+        case StoreApp.servers: "Server Edition"
+        case let c where c.localizedCaseInsensitiveContains("herdr"): "for Herdr"
+        default: category
+        }
+    }
 
     public static let macApps = "Mac apps"
+    public static let servers = "Servers"
 
     public func downloadURL(for release: CatalogFile.Release) -> URL {
         StoreApp.site.appendingPathComponent(id).appendingPathComponent(release.file)
@@ -93,7 +106,7 @@ public enum CatalogLoader {
 
     public static func shelves(from data: Data) throws -> [Shelf] {
         let file = try JSONDecoder().decode(CatalogFile.self, from: data)
-        let apps = file.apps.map { StoreApp(id: $0.key, entry: $0.value) }.filter { $0.latest != nil }
+        let apps = file.apps.map { StoreApp(id: $0.key, entry: $0.value) }.filter { $0.latest != nil || $0.isListing }
         let grouped = Dictionary(grouping: apps, by: \.category)
         let names = grouped.keys.sorted { a, b in
             if a == StoreApp.macApps { return true }

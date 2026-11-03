@@ -109,13 +109,15 @@ private struct StoreMenuItems: View {
                     Button("Update \(app.title)") { installer.install(app) }
                         .keyboardShortcut("u")
                 }
-            } else {
+            } else if !app.isListing {
                 Button(app.isMacApp ? "Install \(app.title)" : "Download \(app.title)") { installer.install(app) }
                     .keyboardShortcut("i")
                     .disabled(state.isBusy)
             }
-            Button("Show on apps.phin.tech") {
-                NSWorkspace.shared.open(URL(string: "https://apps.phin.tech/#\(app.id)")!)
+            if !app.isListing {  // the download page lists only what it has a download for
+                Button("Show on apps.phin.tech") {
+                    NSWorkspace.shared.open(URL(string: "https://apps.phin.tech/#\(app.id)")!)
+                }
             }
             if let source = app.source {
                 Button("View Source") { NSWorkspace.shared.open(source) }

@@ -118,6 +118,30 @@
       "style": "box",
       "aspect": "3:4",
       "prompt": "a giant cartoon alarm clock bursting through a computer screen in a starburst of red and yellow, little calendar pages and a telephone flying out, bold comic-style action lines against a hot pink and orange sky."
+    },
+    {
+      "name": "Welty-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a cozy 1980s home study in soft morning light, a woman in a cardigan holding a coffee mug and smiling at a beige computer on a wooden roll-top desk, a tidy wooden letter sorter with neat little cubbies beside the computer, a scruffy terrier dog sitting proudly at her feet with an envelope in its mouth, houseplants on the windowsill."
+    },
+    {
+      "name": "Welty-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a flock of white envelopes flying like paper birds out of an open rural mailbox on a wooden post and settling into neat glowing wooden pigeonholes, against a dawn sky fading from deep teal to peach."
+    },
+    {
+      "name": "TwistedPairServer-hero",
+      "style": "hero",
+      "aspect": "16:9",
+      "prompt": "a proud office manager in a necktie and rolled-up sleeves standing beside a tall beige tower computer in a small 1980s office back room, a wall-mounted patch panel with neatly coiled orange and blue cables, blinking green lights, a cheerful small toy robot sitting on top of the tower, colleagues visible through a doorway at their desks."
+    },
+    {
+      "name": "TwistedPairServer-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a tall glowing beige server tower rising like a skyscraper at dusk, orange and blue twisted cables running out from its base to a ring of small desk telephones and computers, a cheerful small robot waving from a lit window near the top, against a deep violet to orange sky."
     }
   ]
 }

@@ -72,7 +72,7 @@ struct SoftwareBox: View {
             HStack {
                 BoxBadge()
                 Spacer()
-                Text(app.isMacApp ? "for macOS" : "for Herdr")
+                Text(app.platform)
                     .font(Typeface.garamond(10, "Italic"))
                     .foregroundStyle(Color.paper.opacity(0.9))
             }

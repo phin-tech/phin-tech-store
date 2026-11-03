@@ -8,9 +8,15 @@ the download page, which app-release draws as the shop) to _store/site/, then _s
 the first-visit promo and every file's SHA-256. The store app reads it on launch and on Reload and downloads only
 pictures it doesn't have; app-release reads it when it draws the page, at the next release or `app-release page`.
 
+content/listings.json is for what's on the shelves for its code alone, with nothing to download (a server): each entry
+goes into the catalog, apps.json and private/apps.json, with no releases and a `source` the store's Get the Source
+opens. app-release keeps entries it didn't write, so a listing stays when an app is released. Stores before 0.5 and the
+download page skip an entry without releases. An entry that has releases belongs to app-release and is left alone.
+
 Usage: tools/publish-content.py [--dry-run]
 Needs the `cf` CLI signed in (`cf auth login`), as `just ship` does for the download page.
 """
+from __future__ import annotations
 import argparse, hashlib, json, subprocess, sys, urllib.error, urllib.request
 from pathlib import Path
 
@@ -59,6 +65,51 @@ def put(key: str, path: Path, content_type: str, dry: bool) -> None:
     print("  uploaded", key)
 
 
+def cf_get(key: str) -> dict | None:
+    """A JSON object in the bucket, or None when it isn't there."""
+    r = subprocess.run(["cf", "r2", "objects", "get", key, "--text", "--bucket-name", BUCKET], capture_output=True, text=True)
+    out = r.stdout + r.stderr
+    if "10007" in out or "does not exist" in out:
+        return None
+    if r.returncode or "APIError" in out[:200]:
+        sys.exit(f"could not read {key} from the bucket: {out.strip()[-300:]} (is cf logged in? `cf auth login`)")
+    return json.loads(r.stdout)
+
+
+LISTING_KEYS = ("title", "description", "category", "how", "source")
+
+
+def publish_listings(listings: dict, dry: bool) -> None:
+    """Puts each listing in the catalog: private/apps.json (what app-release reads and writes) first, then apps.json."""
+    for key in ("private/apps.json", "apps.json"):
+        catalog = cf_get(key)
+        if catalog is None:
+            print(f"  {key} isn't in the bucket; skipped")
+            continue
+        apps = catalog.setdefault("apps", {})
+        changed = []
+        for slug, listing in listings.items():
+            missing = [k for k in ("title", "description", "category", "source") if not listing.get(k)]
+            if missing:
+                sys.exit(f"content/listings.json: {slug} needs {', '.join(missing)}")
+            old = apps.get(slug)
+            if old and old.get("releases"):
+                print(f"  {slug} has releases in {key}, so app-release owns it; left alone")
+                continue
+            new = {**{k: listing[k] for k in LISTING_KEYS if listing.get(k)}, "releases": [], "locked": False,
+                   "pinned": bool(listing.get("pinned"))}
+            if old != new:
+                apps[slug] = new
+                changed.append(slug)
+        if not changed:
+            continue
+        out = ROOT / "build" / key.replace("/", "-")
+        out.parent.mkdir(exist_ok=True)
+        out.write_text(json.dumps(catalog, indent=2, sort_keys=True))
+        print(f"  {key}: {', '.join(changed)}")
+        put(key, out, "application/json", dry)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--dry-run", action="store_true", help="say what would be uploaded, upload nothing")
@@ -92,6 +143,9 @@ def main() -> None:
     out.write_text(json.dumps(manifest, indent=1, ensure_ascii=False))
     # Last, so the manifest never names a picture that isn't up yet.
     put(f"{PREFIX}/content.json", out, "application/json", a.dry_run)
+    listings_path = CONTENT / "listings.json"
+    if listings_path.exists():
+        publish_listings(json.loads(listings_path.read_text()), a.dry_run)
     if not a.dry_run:
         print(f"Published: {PUBLIC}/{PREFIX}/content.json")
         print("The download page shows it at the next release of any app, or now with `just release-tool page`.")

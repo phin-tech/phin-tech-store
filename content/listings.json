@@ -1,0 +1,9 @@
+{
+  "TwistedPairServer": {
+    "title": "Twisted Pair Server",
+    "description": "Host Twisted Pair yourself: the server and its Postgres database, in Docker",
+    "category": "Servers",
+    "how": "Run `git clone https://git.phin.tech/sam/twisted-pair.git`, copy `.env.example` to `.env` and fill it in, then run `docker compose -f docker-compose.prod.yml up -d --build`. Needs Docker. For people outside your network, put a TLS proxy in front of it.",
+    "source": "https://git.phin.tech/sam/twisted-pair"
+  }
+}
