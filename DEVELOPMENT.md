@@ -131,6 +131,14 @@ that cap is used up, even when the account has credit.
 release redraws the whole page with the app-release it runs. So this repo and every project that publishes to the page
 stay on the newest app-release tag, or an older one puts the old page back.
 
+`tools/phin-repos.py` does the chores across every project that publishes to the page. It finds them from the
+checkouts under `~/src/github.com/phin-tech` with a `release.toml`, and from the sources on the page.
+
+- `list` shows each project's app-release pin on its remote and in your checkout.
+- `pull` fast-forwards each checkout's `main` and never touches uncommitted work.
+- `bump-app-release v1.10.1` moves them all to a tag. It makes each change in a temporary worktree, then checks,
+  commits and pushes it; add `--bender` when an agent runs it. Every command takes `--dry-run`.
+
 ## First release
 
 Once, before the first `just ship`:
