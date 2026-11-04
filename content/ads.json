@@ -200,6 +200,21 @@
         "body": "Slaps reads the calendars you already keep in Calendar, and finds the Zoom, Meet, Teams, Webex or FaceTime link for you."
       },
       {
+        "body": "Sharing your screen? Slaps holds the alert until you stop, so the whole meeting doesn't learn about your next one."
+      },
+      {
+        "body": "Reminders with a due time get an alert too, with a Mark Done button. So does your battery: pick a level, and Slaps tells you to plug in before your Mac does it the hard way."
+      },
+      {
+        "body": "Scripts, Shortcuts and other apps can put up an alert of their own with a slaps:// link or a line of AppleScript. The build finished? You'll know."
+      },
+      {
+        "body": "Tired of the chime? Have each alert play a YouTube video instead: one of your favourites, a playlist, a channel, or a surprise from ytroulette.com."
+      },
+      {
+        "body": "Slaps keeps itself up to date, and runs on macOS 14 Sonoma or later. Visit the Phin Tech Store and take one home today."
+      },
+      {
         "body": "The hard part is pretending you didn't see it."
       }
     ],
