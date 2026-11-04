@@ -340,5 +340,34 @@
     ],
     "tagline": "The shortest way to anywhere.",
     "finePrint": "Phin Picker is a mod for the Herdr desktop app. It needs git, and gh signed in for pull requests and issues. Keys are added only where they're free."
+  },
+  "redpen": {
+    "layout": "columns",
+    "boxColor": "#B91C1C",
+    "headline": "Somebody, somewhere, is waiting on you.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Three repositories asked for your review this morning. One of them asked twice. Meanwhile your own pull request has been approved since Tuesday, and nobody thought to mention it."
+      },
+      {
+        "heading": "Everything that needs you, in one list.",
+        "body": "Red Pen gathers every pull request asked of you, by name or by your team, and every one that has moved since you last looked. GitHub, Forgejo and Gitea, all on the same page."
+      },
+      {
+        "heading": "And yours, by whose move it is.",
+        "body": "Checks failing, changes requested, conflicts, ready to merge: that's Your Move. Everything else is waiting on someone else, and Red Pen lets it wait."
+      },
+      {
+        "heading": "Snooze it. Dismiss it. Get to it.",
+        "body": "Put a review off until Monday morning, or until something actually happens. Red Pen brings it back right on time, and not a minute before."
+      },
+      {
+        "heading": "Never leave the keyboard.",
+        "body": "j and k to move, space to read the description and every comment, a slash to filter by repository, author or label. When you're ready, one key opens it in your browser."
+      }
+    ],
+    "tagline": "Code review, without the guilt.",
+    "finePrint": "Sits quietly in your menu bar and keeps count. Signs in with your own token, or with gh. Red ink not included."
   }
 }

@@ -154,6 +154,18 @@
       "style": "box",
       "aspect": "3:4",
       "prompt": "a glowing teal magnifying glass picking one shining folder out of a swirling constellation of hundreds of tiny folders and branching git-tree lines, against a deep indigo and teal night sky with sparkles."
+    },
+    {
+      "name": "redpen-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a busy software engineer in a cardigan at a cluttered wooden desk in late afternoon light, holding a bright red pen over a tall stack of printed code listings on green-bar tractor-feed paper, a beige computer with a glowing screen beside her, a row of manila folders in an in-tray, a scruffy brown-and-white terrier dog asleep on a pile of folders under the desk."
+    },
+    {
+      "name": "redpen-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a giant glowing red pen sweeping a bold check mark across the whole painting, through a sky full of floating blank sheets of green-bar computer paper marked only with plain horizontal stripes, the sheets lined up in a tidy queue that recedes toward the horizon, against a deep crimson and indigo gradient sky that runs to every edge of the picture."
     }
   ]
 }
