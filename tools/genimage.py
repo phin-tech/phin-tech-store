@@ -12,7 +12,15 @@ def key():
     k = os.environ.get("OPENROUTER_API_KEY")
     if k:
         return k
-    return subprocess.run(["op", "read", OP_REF], check=True, capture_output=True, text=True).stdout.strip()
+    try:
+        return subprocess.run(["op", "read", OP_REF], check=True, capture_output=True, text=True).stdout.strip()
+    except FileNotFoundError:
+        sys.exit("genimage: set OPENROUTER_API_KEY, or install the 1Password CLI (op) so the key can be read from 1Password.")
+    except subprocess.CalledProcessError as e:
+        sys.exit("genimage: could not read the OpenRouter key from 1Password:\n"
+                 f"  {(e.stderr or '').strip() or 'op failed'}\n"
+                 "Set OPENROUTER_API_KEY, or sign in (turn on the 1Password app's CLI integration, then `op signin`). "
+                 "A shell that cannot reach the app, such as an agent's, fails this way even when your terminal works.")
 
 def main():
     ap = argparse.ArgumentParser()

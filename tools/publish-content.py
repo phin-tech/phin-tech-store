@@ -17,7 +17,7 @@ Usage: tools/publish-content.py [--dry-run]
 Needs the `cf` CLI signed in (`cf auth login`), as `just ship` does for the download page.
 """
 from __future__ import annotations
-import argparse, hashlib, json, subprocess, sys, urllib.error, urllib.request
+import argparse, hashlib, json, shutil, subprocess, sys, urllib.error, urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -114,6 +114,11 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--dry-run", action="store_true", help="say what would be uploaded, upload nothing")
     a = ap.parse_args()
+
+    # Even a dry run reads the live catalog through cf, so say so up front instead of failing with a traceback.
+    if shutil.which("cf") is None:
+        sys.exit("publish-content: the Cloudflare CLI (cf) is not on PATH. Install it and run `cf auth login`; "
+                 "`command -v cf` must find it in this shell (another shell, such as an agent's, can have a different PATH).")
 
     ads = json.loads((CONTENT / "ads.json").read_text())
     art = {}
