@@ -369,5 +369,29 @@
     ],
     "tagline": "Code review, without the guilt.",
     "finePrint": "Sits quietly in your menu bar and keeps count. Signs in with your own token, or with gh. Red ink not included."
+  },
+  "Cubicle": {
+    "layout": "photo",
+    "boxColor": "#3E5C76",
+    "headline": "Your desktops, finally with names.",
+    "kicker": "Introducing Cubicle.",
+    "sections": [
+      {
+        "body": "Every Mac has extra desktops. Almost nobody uses them, because nobody can remember which one is which. Cubicle gives each desktop a name, a place on a grid and a keystroke, so you always know where you left your work."
+      },
+      {
+        "heading": "Jump. Don't swipe.",
+        "body": "Switching desktops on a Mac means a long, lazy slide across the screen. Cubicle skips it. Press a key and you are there. Press another and a grid of all your desktops appears. Type a few letters of a name, \"ino\" for \"Innopts\" say, and Cubicle finds it for you."
+      },
+      {
+        "heading": "It plays well with others.",
+        "body": "Cubicle comes with a command for your terminal, so a script can say \"cubicle go code\" and be there before it finishes the sentence. There is a workflow for Alfred: type @ and a few letters of a name and off you go. And it installs with Homebrew, because of course it does."
+      },
+      {
+        "body": "Cubicle lives in your menu bar, keeps itself up to date, and runs on macOS 13 Ventura or later. Visit the Phin Tech Store and take one home today."
+      }
+    ],
+    "tagline": "A place for everything. And a name for every place.",
+    "finePrint": "Cubicle needs the Accessibility permission to press keys on your behalf, and promises to use it only for good. The Alfred workflow needs Alfred's Powerpack. Cubicles sold separately. Corner offices not included."
   }
 }

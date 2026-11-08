@@ -166,6 +166,18 @@
       "style": "box",
       "aspect": "3:4",
       "prompt": "a giant glowing red pen sweeping a bold check mark across the whole painting, through a sky full of floating blank sheets of green-bar computer paper marked only with plain horizontal stripes, the sheets lined up in a tidy queue that recedes toward the horizon, against a deep crimson and indigo gradient sky that runs to every edge of the picture."
+    },
+    {
+      "name": "Cubicle-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a small cheerful office worker in a tie sitting at a little desk inside one glowing amber cubicle, typing at a glowing monitor, while many more open cubicle cells with slate-blue fabric walls and polished brass rails float away in rows into a deep violet and orange twilight sky, each cell a little dimmer than the last, tiny paper airplanes hopping from cell to cell leaving trails of light."
+    },
+    {
+      "name": "Cubicle-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a friendly young woman with a bob haircut, a bright cardigan and big round glasses sits at a desk in an open-plan office of fabric-walled cubicles, her hands on the keyboard of a beige computer, smiling at its green-phosphor screen, which shows a tidy grid of four rectangles with one rectangle glowing warm amber; a coffee mug, a desk lamp, a potted fern and a filing cabinet around her, and rows of identical cubicles stretching away behind her."
     }
   ]
 }
