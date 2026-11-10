@@ -393,5 +393,33 @@
     ],
     "tagline": "A place for everything. And a name for every place.",
     "finePrint": "Cubicle needs the Accessibility permission to press keys on your behalf, and promises to use it only for good. The Alfred workflow needs Alfred's Powerpack. Cubicles sold separately. Corner offices not included."
+  },
+  "corkboard": {
+    "layout": "photo",
+    "boxColor": "#6B2D3A",
+    "headline": "Some work only makes sense on a wall.",
+    "kicker": "Introducing Corkboard.",
+    "sections": [
+      {
+        "body": "You know the wall. Index cards, push pins, string from one card to another, and one person who can explain it. Linear keeps your team's work very well. It just never let you pin any of it up."
+      },
+      {
+        "heading": "Press b.",
+        "body": "Corkboard pins the Issues you're looking at to a cork board, a column for each Workflow state. Every Link between two of them is a String from tack to tack, coloured by what it means, and it swings when you move a card. Drop a card in another column and Linear hears about it."
+      },
+      {
+        "heading": "Hands stay home.",
+        "body": "j and k to move. l b to say what's blocking it, l p to give it a Parent, p p to put it in a Project. Space shows every Command and ⌘K finds one. The mouse works too, for those who insist."
+      },
+      {
+        "heading": "Or read it as a page.",
+        "body": "Press P and the same Issues are written out as a Microfiche Note: a Heading for each state, each Sub-issue beneath its Parent. Corkboard opens Microfiche folders as well, with the same keys."
+      },
+      {
+        "body": "Corkboard keeps a copy of your Issues on your Mac, so lists, filters and Search answer at once, on a plane or off one, and your edits wait in line until Linear can take them. Visit the Phin Tech Store and get it all up on the wall."
+      }
+    ],
+    "tagline": "Linear, with strings attached.",
+    "finePrint": "Corkboard needs macOS 14 Sonoma or later and a Linear personal API key, which it keeps in the Keychain. Push pins not included."
   }
 }

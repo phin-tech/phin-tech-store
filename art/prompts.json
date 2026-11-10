@@ -178,6 +178,18 @@
       "style": "hero",
       "aspect": "4:3",
       "prompt": "a friendly young woman with a bob haircut, a bright cardigan and big round glasses sits at a desk in an open-plan office of fabric-walled cubicles, her hands on the keyboard of a beige computer, smiling at its green-phosphor screen, which shows a tidy grid of four rectangles with one rectangle glowing warm amber; a coffee mug, a desk lamp, a potted fern and a filing cabinet around her, and rows of identical cubicles stretching away behind her."
+    },
+    {
+      "name": "corkboard-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a rumpled project manager in shirtsleeves and a loosened tie stands before a big cork board filling an office wall, covered in index cards pinned in tidy columns and joined by taut red, blue and yellow strings running between brass push pins, pointing at one card with a pencil while a colleague holding a coffee mug looks on, unconvinced; a beige computer on the desk beside them, venetian-blind window light striping the wall."
+    },
+    {
+      "name": "corkboard-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a glowing cork board floating in a vast sky, covered in index cards in neat columns, linked by luminous red, gold and blue strings that hang in soft arcs between shining brass tacks, a few cards drifting loose toward the board, against a deep burgundy and dusk-orange gradient sky."
     }
   ]
 }
