@@ -45,7 +45,8 @@ description. To give it a real ad, no release of the store needed:
 
 1. Write its copy in `content/ads.json`, keyed by its apps.json id: a layout
    (`classic`, `photo`, `columns` or `product`), a box colour, a headline, sections, a
-   tagline and fine print.
+   tagline and fine print. `content/COPY.md` has the house voice and what each
+   layout looks like.
 2. Add a `<id>-hero` and a `<id>-box` prompt to `art/prompts.json` and run
    `tools/genart.py <id>-hero <id>-box`. It renders them with an image model on
    OpenRouter (the key is read from 1Password) into `content/art`.

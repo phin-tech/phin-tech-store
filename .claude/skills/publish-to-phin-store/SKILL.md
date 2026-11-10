@@ -10,7 +10,8 @@ Three repos, checked out under `~/src/github.com/phin-tech/`:
 | Repo | Role |
 | --- | --- |
 | `apple-template` | copier template. Creates a new app, or adds only the release tooling to an existing project |
-| `app-release` | The release tool (`just ship`, `notarize`, `release`, ...) and the code that draws apps.phin.tech (`page.py`) |
+| `app-release` | The release tool (`just ship`, `notarize`, `release`, ...): puts the zip, the manifest and the docs in the bucket |
+| `apps-site` | Draws apps.phin.tech and docs.phin.tech from the bucket; a release, `publish-content` and `release-tool page` run its deploy |
 | `phin-tech-store` | The store app, and `content/` (ads, art): the shop's look for each app |
 
 Publishing has two independent halves. The first puts the app on the download page, and so in the store. The second gives
@@ -21,8 +22,8 @@ existing project. This skill is the route through them, not a copy.
 
 ## Rules
 
-- A release redraws the whole page with the app-release tag the project pins. Pin the **newest** tag. An older tag puts
-  the old page back for every app. Find it with `git -C ~/src/github.com/phin-tech/app-release fetch --tags -q &&
+- Pin the **newest** app-release tag. A release only writes data (apps-site draws the pages), but a pin before v1.11.0
+  still draws the old page itself and puts it back for every app, and rejects `[site]`. Find it with `git -C ~/src/github.com/phin-tech/app-release fetch --tags -q &&
   git -C ~/src/github.com/phin-tech/app-release tag --sort=-v:refname | head -1` (plain `git tag` sorts as text and
   lists `v1.9.x` last). `tools/phin-repos.py list` in phin-tech-store shows every project's pin.
 - To move a project to a tag: change `tag` in `scripts/release/pyproject.toml`, then
@@ -30,7 +31,7 @@ existing project. This skill is the route through them, not a copy.
   v0.4.1), so every project made from it needs this straight after creation.
 - The maintainer runs `just ship`. Do the setup, run `--dry-run`, and stop unless asked to ship.
 - `just publish-content` and `just release-tool page` change what every installed store and apps.phin.tech show
-  (`page` re-uploads the live page with phin-tech-store's own pin, so check that is the newest first). Run
+  (`page` runs apps-site's deploy). Run
   `publish-content --dry-run` first and publish only when asked. `publish-content` sends everything in `content/`,
   including unrelated uncommitted edits, plus `_store/site/*` and any `content/listings.json` entries (merged into the
   live `apps.json` and `private/apps.json`): check `git status` and the dry-run's file list.
@@ -168,10 +169,10 @@ In `phin-tech-store`, after the app's first release appears in `https://apps.phi
 
 1. **Copy.** Add `<key>` to `content/ads.json`: `layout` (`classic`, `photo`, `columns`, `product`), `boxColor` (`#rrggbb`),
    `headline`, `kicker`, `sections` (`heading`?, `body`), `tagline`, `finePrint`, optional `title`. Copy an existing
-   entry's voice (Dottie's is a good model): 1980s magazine-ad tone, with a joke in the fine print.
+   Write it to `content/COPY.md`: the house voice, what each field holds, and each layout's shape.
 2. **Art.** Add two objects to the `images` array in `art/prompts.json`:
    `{"name": "<key>-box", "style": "box", "aspect": "3:4", "prompt": "..."}` and the same for `<key>-hero` with
-   `"style": "hero"` (its aspect varies: 4:3 or 3:4 in the existing ones). `styles` supplies the shared look, so the
+   `"style": "hero"` at the aspect `content/COPY.md` gives its layout (the ad crops it to that). `styles` supplies the shared look, so the
    prompt describes only the subject. Run `tools/genart.py <key>-box <key>-hero`: it generates `art/raw/<name>.png`
    through OpenRouter and writes `content/art/<key>-box.jpg` and `<key>-hero.jpg`. The OpenRouter key is read from
    1Password (or `OPENROUTER_API_KEY`). It has its own spending cap: a `402` means the cap is used, even with credit.
@@ -183,18 +184,19 @@ In `phin-tech-store`, after the app's first release appears in `https://apps.phi
    A code-only entry with no download (a server, say) goes on the shelves through `content/listings.json` instead.
 3. **Check.** `just test`, then `just publish-content --dry-run`.
 4. **Publish** only when asked: `just publish-content`. It uploads changed art to `_store/` and then `_store/content.json`.
-   Stores pick it up on next open or View ▸ Reload the Shelves (⌘R). The page shows it at the next release of any app,
-   or now with `just release-tool page` (also only when asked; see Rules).
+   Stores pick it up on next open or View ▸ Reload the Shelves (⌘R). It then runs apps-site's deploy, and
+   apps.phin.tech shows it a minute or two later.
 
 The same step edits `content/promo.json` (the first-visit offer) and `content/store.json` (the hotline), if asked.
 
-The art can come later: an ad published without it (Cubicle's was) is fine, because `page.py` draws the hero only if it
+The art can come later: an ad published without it (Cubicle's was) is fine, because apps-site draws the hero only if it
 exists and an app with no box art gets the plain box.
 
 ## 4. Verify
 
 - `https://apps.phin.tech/apps.json` lists the app with the new version and a checksum.
-- `https://apps.phin.tech/#<key>` opens its ad.
+- `https://apps.phin.tech/<key>/index.html` opens its ad. Its docs page and gallery come from `[site]` in its
+  `release.toml`: see the `apps-phin-tech` skill.
 - The store shows the box and Install works: `just debug-app`, then `just debug snapshot out.png` (or a normal build
   and ⌘R). Don't quit the maintainer's own running copy. `snapshot` comes out blank for the shelves and ads; use
   `screencapture -o -l <window id>` for those.

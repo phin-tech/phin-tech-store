@@ -116,7 +116,7 @@ Sparkle's tools are downloaded, pinned, into `~/Library/Caches/app-release`. Deb
 
 `just publish-content` uploads whatever changed to `_store/` on the page (with `cf`, as `just ship` does) and then
 `_store/content.json`, which lists it all with checksums. Installed stores show it the next time they open. The
-page shows it at the next release of any app that publishes there, or now with `just release-tool page`. A new
+page shows it a minute or two later: `just publish-content` ends by running apps-site's deploy, which redraws it. A new
 app's ad needs no release of the store.
 
 **New art.** Add `<key>-box` and `<key>-hero` prompts to `art/prompts.json`, then run
@@ -127,9 +127,11 @@ JPEGs into `content/art`. `--ref` gives the model a reference picture. Use the P
 right one is orange with a brown patch. The key has its own spending cap on OpenRouter; a `402 Payment Required` means
 that cap is used up, even when the account has credit.
 
-**The page's design** lives in [app-release](https://git.phin.tech/sam/app-release) (`page.py`), not here. Every
-release redraws the whole page with the app-release it runs. So this repo and every project that publishes to the page
-stay on the newest app-release tag, or an older one puts the old page back.
+**The page's design** lives in [apps-site](https://github.com/phin-tech/apps-site), not here: the shop, each app's page
+(`apps.phin.tech/<key>/index.html`, with its ad, pictures and every version's notes) and the app manuals on
+docs.phin.tech, all drawn from the bucket. A release writes only data (the zip, the manifest, the docs bundle from
+`[site]` in `release.toml`) and runs apps-site's deploy, so how the pages look doesn't depend on any project's
+app-release tag. `just release-tool page` redraws them now.
 
 `tools/phin-repos.py` does the chores across every project that publishes to the page. It finds them from the
 checkouts under `~/src/github.com/phin-tech` with a `release.toml`, and from the sources on the page.

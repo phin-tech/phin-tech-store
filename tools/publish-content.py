@@ -4,9 +4,10 @@ without a new release of the store.
 
 Reads content/ads.json, content/promo.json, content/store.json (the hotline) and content/art/, and uploads to the phin-apps R2 bucket (served at
 https://apps.phin.tech): the pictures whose checksum changed go to _store/art/, the shop's own pictures and fonts (for
-the download page, which app-release draws as the shop) to _store/site/, then _store/content.json, which lists the ads,
+the download page, which apps-site draws as the shop) to _store/site/, then _store/content.json, which lists the ads,
 the first-visit promo and every file's SHA-256. The store app reads it on launch and on Reload and downloads only
-pictures it doesn't have; app-release reads it when it draws the page, at the next release or `app-release page`.
+pictures it doesn't have. Then it runs apps-site's deploy (https://github.com/phin-tech/apps-site), which redraws
+apps.phin.tech with it.
 
 content/listings.json is for what's on the shelves for its code alone, with nothing to download (a server): each entry
 goes into the catalog, apps.json and private/apps.json, with no releases and a `source` the store's Get the Source
@@ -151,9 +152,15 @@ def main() -> None:
     listings_path = CONTENT / "listings.json"
     if listings_path.exists():
         publish_listings(json.loads(listings_path.read_text()), a.dry_run)
-    if not a.dry_run:
-        print(f"Published: {PUBLIC}/{PREFIX}/content.json")
-        print("The download page shows it at the next release of any app, or now with `just release-tool page`.")
+    if a.dry_run:
+        print("  would run gh workflow run deploy.yml -R phin-tech/apps-site, to redraw apps.phin.tech")
+        return
+    print(f"Published: {PUBLIC}/{PREFIX}/content.json")
+    redraw = ["gh", "workflow", "run", "deploy.yml", "-R", "phin-tech/apps-site"]
+    if subprocess.run(redraw, capture_output=True).returncode:
+        print(f"Couldn't start apps-site's deploy; apps.phin.tech shows it after `{' '.join(redraw)}`.")
+    else:
+        print("apps.phin.tech shows it in a minute or two: https://github.com/phin-tech/apps-site/actions")
 
 
 if __name__ == "__main__":

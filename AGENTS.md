@@ -33,8 +33,8 @@ The change is done when these pass, and your report names any you did not run:
   the app running; the maintainer may have their own open.
 - Sparkle is an Xcode-only dependency (project.yml); keep it out of `Package.swift`, or `swift test` would build it.
 - The release tool is app-release, a separate repository pinned in `scripts/release/pyproject.toml`; change it there,
-  not here. It also draws apps.phin.tech (`page.py`), and each release redraws the page with its own version: keep the
-  pin on the newest tag, and move the other projects that publish there with it.
+  not here. apps.phin.tech's pages and docs.phin.tech are drawn by apps-site (`~/src/github.com/phin-tech/apps-site`),
+  from the bucket: a release, `just publish-content` and `just release-tool page` all run its deploy.
 - `just debug snapshot` comes out blank for the shelves and the ads (a SwiftUI `ScrollView` in a `NavigationStack`
   draws in layers the snapshot misses). Bring the app to the front and use `screencapture -o -l <window id>`.
 - Cloudflare in front of apps.phin.tech refuses Python's default User-Agent (403). Send one, as
