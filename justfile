@@ -37,6 +37,19 @@ debug *args:
 publish-content *args:
     tools/publish-content.py {{args}}
 
+# Origin is Forgejo, which mirrors to GitHub, where .github/workflows/release.yml notarizes and publishes the tag.
+# Write release-notes/<version>.md first (`just notes <part>`) for notes of your own.
+# Cut a release for GitHub Actions to build: bump (patch, minor, major, beta), commit, tag v<version>, push
+[positional-arguments]
+cut part *args:
+    test "$(git branch --show-current)" = main || { echo "cut from main"; exit 1; }
+    git fetch --quiet origin main && test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" || { echo "main is not origin/main; push or pull first"; exit 1; }
+    {{release_tool}} bump "$@"
+    version=$(sed -n 's/^ *MARKETING_VERSION: "\(.*\)"/\1/p' project.yml) && \
+      git add -A && git commit --quiet -m "PhinTechStore $version" && git tag "v$version" && \
+      git push --quiet --atomic origin main "v$version" && \
+      echo "Pushed v$version; the build: https://github.com/phin-tech/phin-tech-store/actions/workflows/release.yml"
+
 # Remove build artifacts and the generated Xcode project
 clean:
     rm -rf .build DerivedData PhinTechStore.xcodeproj

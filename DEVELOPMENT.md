@@ -22,8 +22,8 @@
 ## Building
 
 Needs Xcode 26.6 or later, [xcodegen](https://github.com/yonaskolb/XcodeGen), [just](https://just.systems)
-and, for releasing, [uv](https://docs.astral.sh/uv/), `gh` and the 1Password CLI `op`:
-`brew install xcodegen just uv gh 1password-cli`.
+and, for releasing, [uv](https://docs.astral.sh/uv/), `gh` and the Infisical CLI:
+`brew install xcodegen just uv gh infisical/get-cli/infisical`.
 
 ```sh
 just build           # generate the Xcode project and build the app
@@ -55,6 +55,14 @@ Apple and staples the ticket (`just notarize`), then publishes the GitHub releas
 with the certificate in its keychain, from a clean, pushed `main`. Every release recipe takes `--dry-run`, which runs
 the checks and reads but only prints what it would change: `just ship beta --dry-run`.
 
+**From GitHub Actions:** `just cut patch` (or `minor`, `major`, `beta`) bumps, commits, tags `v<version>` and pushes
+to `origin`, the primary repository on Forgejo, which mirrors to GitHub. The tag starts
+`.github/workflows/release.yml`, which runs `just notarize` and `just release` on a macOS runner at that commit. It
+makes no commits or tags of its own (the mirror deletes refs Forgejo doesn't have) and installs nothing: put a
+development build on this Mac with `just install`. Its secrets come from Infisical, signed in with GitHub's OIDC
+token as the machine identity `phin-tech-store-ci`, which only `v*` tags of this repository can use; the workflow's
+header lists them.
+
 **Betas.** `just ship beta` makes the next beta: from 0.6.1, `0.7.0-beta.1`, then `-beta.2`. For a beta of a
 patch or a major instead, `just ship beta --of patch` (0.6.1 → `0.6.2-beta.1`) or `--of major` (`1.0.0-beta.1`);
 later betas carry on with plain `just ship beta`, and `just ship patch` releases it. A beta is a GitHub
@@ -69,14 +77,14 @@ the same template: a Python program pinned to a tag in `scripts/release/pyprojec
 with your git credentials for git.phin.tech. What it knows about PhinTechStore is in `release.toml`. Versions are written
 by [bump-my-version](https://github.com/callowayproject/bump-my-version) (`.bumpversion.toml` lists the files), and
 the appcast by Sparkle's own `generate_appcast`. Settings come from the environment (`NOTARY_OP_ITEM`,
-`DEVELOPMENT_TEAM`, `NOTARY_PROFILE`), so a build machine can run it unattended; `op` works there with a 1Password
-service account (`OP_SERVICE_ACCOUNT_TOKEN`). `just doctor` checks everything it needs outside the repository.
+`DEVELOPMENT_TEAM`, `NOTARY_PROFILE`), so a build machine can run it unattended; Infisical works there with a machine
+identity's token (`INFISICAL_TOKEN`). `just doctor` checks everything it needs outside the repository.
 
-Credentials come from 1Password (`op://Development/lc6wrq7lltjd47uue26cdxttzu`: `apple_id`, `team_id`, `app_specific_password`, `p12` and
-`p12_passphrase` (the Developer ID certificate), and `sparkle_private_key`), so a Mac needs only the 1Password CLI signed in (`op signin`) to release. The certificate
-goes into a keychain made for each run and deleted afterwards; without `p12` in the item, the login keychain's is used.
-To keep the secrets in Infisical, or in a CI tool's environment, instead, add `[secrets]` to `release.toml` (see
-app-release's README). Without any notarization credentials, `just notarize` falls
+Credentials come from Infisical Cloud (project `phin-tech-store`, environment `prod`, `[secrets]` in `release.toml`):
+`APPLE_ID`, `TEAM_ID`, `APP_SPECIFIC_PASSWORD`, `P12` (the Developer ID certificate, base64-encoded) and
+`P12_PASSPHRASE`, and `SPARKLE_PRIVATE_KEY`, so a Mac needs only `infisical login` to release. 1Password
+(`op://Development/lc6wrq7lltjd47uue26cdxttzu`) keeps the copy they were moved from. The certificate
+goes into a keychain made for each run and deleted afterwards.
 back to a notarytool keychain profile: `xcrun notarytool store-credentials phin-tech-store-notary --apple-id <apple id>
 --team-id J35P7AJDN7`.
 
@@ -97,7 +105,7 @@ The steps by hand, if one fails halfway:
 The app updates itself in place with [Sparkle](https://sparkle-project.org) (`App/UpdateChecker.swift`). Its feed,
 `SUFeedURL`, is `releases/latest/download/appcast.xml`: an asset of the newest release (GitHub skips drafts and
 pre-releases), made by Sparkle's `generate_appcast` in `just appcast`. Entries are signed with the EdDSA key in
-1Password (`sparkle_private_key`, given to the tool on stdin; the public half is `SUPublicEDKey` in `project.yml`), so
+Infisical (`SPARKLE_PRIVATE_KEY`, given to the tool on stdin; the public half is `SUPublicEDKey` in `project.yml`), so
 installed copies only accept updates signed by it. Do not lose or replace that key: copies already out there would
 reject every later update. `just appcast` checks every entry is signed and the new one verifies before it uploads.
 Sparkle's tools are downloaded, pinned, into `~/Library/Caches/app-release`. Debug builds do not check for updates.
@@ -147,7 +155,7 @@ Once, before the first `just ship`:
 
 1. `just bootstrap`: creates the GitHub repository `phin-tech/phin-tech-store` (public: Sparkle and Homebrew download the
    release zips without credentials), pushes `main` to it, and runs `just doctor`, which checks `gh`,
-   every 1Password field and the Developer ID certificate.
+   every secret in Infisical and the Developer ID certificate.
 2. Fix whatever `just doctor` lists, and run it again until it is clean.
 3. The Sparkle key in `op://Development/lc6wrq7lltjd47uue26cdxttzu` must be the other half of `SUPublicEDKey` in `project.yml` (`just appcast` checks
    this before uploading anything). For a key of its own, run Sparkle's `generate_keys -x <file>` from
