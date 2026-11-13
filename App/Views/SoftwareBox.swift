@@ -21,8 +21,8 @@ struct SoftwareBox: View {
         HStack(spacing: 0) {
             spineFace
                 .frame(width: spine, height: height)
-                .rotation3DEffect(.degrees(-62), axis: (0, 1, 0), anchor: .trailing, perspective: 0.6)
-                .frame(width: spine * 0.5, alignment: .trailing)
+                .modifier(SpineProjection(visibleWidth: spine * 0.5, taper: height * 0.035))
+                .frame(width: spine * 0.5, alignment: .leading)
             front
                 .frame(width: width, height: height)
         }
@@ -130,6 +130,36 @@ struct SoftwareBox: View {
     private var isNew: Bool {
         guard let first = app.releases.last?.date, let date = DateFormatter.catalog.date(from: first) else { return false }
         return Date().timeIntervalSince(date) < 14 * 86_400
+    }
+}
+
+/// Draws the spine as a side of the box turned away from the viewer. Its near (trailing) edge
+/// stays full height at `visibleWidth`, where it meets the front face; its far (leading) edge
+/// sits at x = 0, `taper` shorter at the top and the bottom.
+struct SpineProjection: GeometryEffect {
+    var visibleWidth: CGFloat
+    var taper: CGFloat
+
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        // Map the unit square onto the quad (Heckbert's square-to-quad).
+        let (x0, y0) = (0.0, taper)                        // top far
+        let (x1, y1) = (visibleWidth, 0.0)                 // top near
+        let (x2, y2) = (visibleWidth, size.height)         // bottom near
+        let (x3, y3) = (0.0, size.height - taper)          // bottom far
+        let dx1 = x1 - x2, dx2 = x3 - x2, dx3 = x0 - x1 + x2 - x3
+        let dy1 = y1 - y2, dy2 = y3 - y2, dy3 = y0 - y1 + y2 - y3
+        let den = dx1 * dy2 - dx2 * dy1
+        let g = (dx3 * dy2 - dx2 * dy3) / den
+        let h = (dx1 * dy3 - dx3 * dy1) / den
+        let a = x1 - x0 + g * x1, b = x3 - x0 + h * x3
+        let d = y1 - y0 + g * y1, e = y3 - y0 + h * y3
+        // Fold in the view-to-unit-square scale. SwiftUI multiplies row vectors: [x y 1] · M.
+        let sx = 1 / size.width, sy = 1 / size.height
+        var m = CATransform3DIdentity
+        m.m11 = a * sx; m.m12 = d * sx; m.m14 = g * sx
+        m.m21 = b * sy; m.m22 = e * sy; m.m24 = h * sy
+        m.m41 = x0;     m.m42 = y0;     m.m44 = 1
+        return ProjectionTransform(m)
     }
 }
 
