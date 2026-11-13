@@ -352,23 +352,30 @@
       },
       {
         "heading": "Everything that needs you, in one list.",
-        "body": "Red Pen gathers every pull request asked of you, by name or by your team, and every one that has moved since you last looked. GitHub, Forgejo and Gitea, all on the same page."
+        "body": "Red Pen gathers every pull request asked of you, by name or by your team, from GitHub, Forgejo and Gitea. Your own are sorted by whose move it is. Put one off until Monday and it comes back on Monday, not a minute before."
       },
       {
-        "heading": "And yours, by whose move it is.",
-        "body": "Checks failing, changes requested, conflicts, ready to merge: that's Your Move. Everything else is waiting on someone else, and Red Pen lets it wait."
+        "heading": "Notes in red ink.",
+        "body": "Press c to read the changes. Write notes on the lines as you go, keep the ones that are only for you, and press p on the ones worth saying. ⌘Return posts them as one review. Next time, ⇧S shows only what's new since you looked."
       },
       {
-        "heading": "Snooze it. Dismiss it. Get to it.",
-        "body": "Put a review off until Monday morning, or until something actually happens. Red Pen brings it back right on time, and not a minute before."
+        "heading": "An agent who has read the code.",
+        "body": "Open the Agent panel with your own Claude Code, Pi or ACP agent. It reads the diff, then the rest of the repository: the callers, the definitions, the tests. It reads the log of the check that failed. Ask, and it walks you through the change stop by stop, on the lines themselves."
+      },
+      {
+        "heading": "Before it's a pull request at all.",
+        "body": "⌘O opens a branch in a clone on your Mac, perhaps one an agent is still writing. Mark it up the same way. Your notes go back to the agent as a round of review, and never to the Forge."
       },
       {
         "heading": "Never leave the keyboard.",
-        "body": "j and k to move, space to read the description and every comment, a slash to filter by repository, author or label. When you're ready, one key opens it in your browser."
+        "body": "j and k to move, a slash to filter, Space for every command in the app. The lists, the changes and the agent all answer to the same keys."
+      },
+      {
+        "body": "Visit the Phin Tech Store and get your reviews back before anyone has to ask twice."
       }
     ],
     "tagline": "Code review, without the guilt.",
-    "finePrint": "Sits quietly in your menu bar and keeps count. Signs in with your own token, or with gh. Red ink not included."
+    "finePrint": "Requires macOS 14 Sonoma or later. Sits quietly in your menu bar and keeps count. Signs in with your own token, or with gh. The agent is your own Claude Code, Pi or ACP agent, sold separately. Red ink not included."
   },
   "Cubicle": {
     "layout": "photo",
