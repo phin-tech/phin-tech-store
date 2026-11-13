@@ -1,0 +1,89 @@
+# Builds and publishes a release when its tag arrives. Forgejo (git.phin.tech) is the primary repository and pushes
+# to this one as a mirror; `just cut <part>` bumps, commits and tags v<version> there. This runs `just notarize` and
+# `just release` on main at that tag: the notarized app, the GitHub release, the appcast and the download page.
+# It creates no commits or tags, since the mirror would delete refs that aren't on Forgejo.
+#
+# Every secret comes from Infisical Cloud (project phin-tech-store, env prod), signed in with GitHub's OIDC token as the
+# machine identity phin-tech-store-ci, which only v* tags of this repository can use. GitHub stores none of them.
+#   /     what app-release reads itself (release.toml [secrets]): APPLE_ID, TEAM_ID, APP_SPECIFIC_PASSWORD, P12,
+#         P12_PASSPHRASE, SPARKLE_PRIVATE_KEY
+#   /ci   what the runner needs around it, put in the environment: GH_TOKEN (the release here, and apps-site's
+#         deploy), CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID (cf, for the download page), FORGEJO_USER and
+#         FORGEJO_TOKEN (uv fetching app-release from git.phin.tech)
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write  # GitHub's OIDC token, to sign in to Infisical
+
+env:
+  INFISICAL_PROJECT: ab5ef8f1-af05-4d58-875d-f0e28832d026
+  INFISICAL_IDENTITY: 226ac249-6ef4-4846-a529-3ef96346a231
+  CF_SEND_TELEMETRY: "false"
+
+jobs:
+  release:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main       # app-release publishes from main, at the tagged commit
+          fetch-depth: 0  # tags and history, for the release notes
+
+      - name: Check the tag is main's commit and project.yml's version
+        run: |
+          tag=${GITHUB_REF_NAME}
+          [ "$(git rev-parse HEAD)" = "$(git rev-parse "$tag^{commit}")" ] ||
+            { echo "::error::main has moved past $tag; release it by hand (just notarize, just release)"; exit 1; }
+          version=$(sed -n 's/^ *MARKETING_VERSION: "\(.*\)"/\1/p' project.yml)
+          [ "v$version" = "$tag" ] || { echo "::error::$tag, but project.yml says $version"; exit 1; }
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install tools
+        run: |
+          brew install xcodegen just infisical/get-cli/infisical
+          npm install --global cf@1.0.0-beta.27
+
+      - name: Sign in to Infisical
+        run: |
+          jwt=$(curl -sSf -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=infisical" | jq -r .value)
+          token=$(infisical login --method=oidc-auth --machine-identity-id="$INFISICAL_IDENTITY" --jwt="$jwt" \
+            --plain --silent)
+          echo "::add-mask::$token"
+          echo "INFISICAL_TOKEN=$token" >> "$GITHUB_ENV"
+
+      - name: Load the runner's secrets
+        run: |
+          infisical export --projectId "$INFISICAL_PROJECT" --env prod --path /ci --format json > "$RUNNER_TEMP/ci.json"
+          python3 - "$RUNNER_TEMP/ci.json" <<'EOF'
+          import base64, json, os, sys
+          secrets = {s["key"]: s["value"] for s in json.load(open(sys.argv[1]))}
+          os.remove(sys.argv[1])
+          for name in ("GH_TOKEN", "CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID", "FORGEJO_USER", "FORGEJO_TOKEN"):
+              if not secrets.get(name):
+                  sys.exit(f"{name} is missing from Infisical (prod, /ci)")
+          # uv clones app-release over HTTPS with git; give git the Forgejo token for git.phin.tech only.
+          basic = base64.b64encode(f"{secrets['FORGEJO_USER']}:{secrets['FORGEJO_TOKEN']}".encode()).decode()
+          env = {**secrets, "GIT_CONFIG_COUNT": "1",
+                 "GIT_CONFIG_KEY_0": "http.https://git.phin.tech/.extraheader",
+                 "GIT_CONFIG_VALUE_0": f"Authorization: Basic {basic}"}
+          with open(os.environ["GITHUB_ENV"], "a") as out:
+              for value in (*secrets.values(), basic):
+                  print(f"::add-mask::{value}")
+              for name, value in env.items():
+                  out.write(f"{name}={value}\n")
+          EOF
+
+      - run: just notarize
+      - run: just release
