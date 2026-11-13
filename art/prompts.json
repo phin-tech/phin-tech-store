@@ -195,7 +195,8 @@
       "name": "boiler-room-hero",
       "style": "hero",
       "aspect": "4:3",
-      "prompt": "a relaxed man in a cardigan reading a paperback in a comfortable armchair with his feet up on an ottoman and a mug of cocoa beside him, while on the desk behind him a beige computer quietly works on its own, its screen glowing, a small brass pressure gauge sitting on top of the monitor, warm evening lamp light, a window showing dusk."
+      "prompt": "a relaxed Black man in his forties wearing a cardigan, reading a paperback in a comfortable armchair with his feet up on an ottoman and a mug of cocoa beside him; curled up asleep on the ottoman next to his feet is Pepper, the scruffy brown-and-white terrier from the reference photograph; on the desk behind them a beige computer quietly works on its own, its screen a plain soft amber glow with nothing written on it, a small brass pressure gauge sitting on top of the monitor, warm evening lamp light, a window showing dusk.",
+      "ref": "art/raw/Microfiche-hero.png"
     },
     {
       "name": "boiler-room-box",
