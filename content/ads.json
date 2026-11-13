@@ -421,5 +421,34 @@
     ],
     "tagline": "Linear, with strings attached.",
     "finePrint": "Corkboard needs macOS 14 Sonoma or later and a Linear personal API key, which it keeps in the Keychain. Push pins not included."
+  },
+  "boiler-room": {
+    "layout": "classic",
+    "boxColor": "#7C5A12",
+    "title": "Boiler Room",
+    "headline": "Somebody has to keep checking. It doesn't have to be you.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "The support case says someone will be in touch. So you look. You look again after lunch, at four, at six, and once more before bed, just in case. Nothing. Nothing. Nothing."
+      },
+      {
+        "body": "Boiler Room does the looking. Write a script that checks once, the way you'd type it in a terminal, and Boiler Room runs it every three hours, or every two minutes, or at nine on weekdays. It keeps what the script said every time."
+      },
+      {
+        "body": "It only speaks up when something's different. A new reply, a build gone red, a status that finally moved: one notification. The other forty-one times, not a word."
+      },
+      {
+        "body": "When a script needs you, it asks. Rotate the key? Yes or No, from the notification. It waits."
+      },
+      {
+        "body": "Waiting on a pull request? Type boiler-room submit --every 30s -- gh pr checks 123 and get on with your day. Boiler Room tells you when it passes, then tidies up after itself."
+      },
+      {
+        "body": "Visit the Phin Tech Store and take your evenings back."
+      }
+    ],
+    "tagline": "Somebody's got to watch the gauges.",
+    "finePrint": "Boiler Room needs macOS 14 Sonoma or later. The scripts are yours; Boiler Room only runs them. Full-screen alerts need Slaps, also from Phin Tech. Coal not included."
   }
 }

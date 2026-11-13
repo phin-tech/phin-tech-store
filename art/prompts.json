@@ -190,6 +190,18 @@
       "style": "box",
       "aspect": "3:4",
       "prompt": "a glowing cork board floating in a vast sky, covered in index cards in neat columns, linked by luminous red, gold and blue strings that hang in soft arcs between shining brass tacks, a few cards drifting loose toward the board, against a deep burgundy and dusk-orange gradient sky."
+    },
+    {
+      "name": "boiler-room-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a relaxed man in a cardigan reading a paperback in a comfortable armchair with his feet up on an ottoman and a mug of cocoa beside him, while on the desk behind him a beige computer quietly works on its own, its screen glowing, a small brass pressure gauge sitting on top of the monitor, warm evening lamp light, a window showing dusk."
+    },
+    {
+      "name": "boiler-room-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a gleaming brass boiler with round pressure gauges, valves and copper pipes filling the lower half of the picture, curls of steam rising and turning into little clock faces and paper envelopes, one gauge glowing as its needle swings, the painted sky behind it fading from deep amber at the horizon to midnight blue at the top edge, the sky and the painting reaching every edge of the frame."
     }
   ]
 }
