@@ -460,5 +460,37 @@
     ],
     "tagline": "Somebody's got to watch the gauges.",
     "finePrint": "Boiler Room needs macOS 14 Sonoma or later. The scripts are yours; Boiler Room only runs them. Full-screen alerts need Slaps, also from Phin Tech. Coal not included."
+  },
+  "patchbay": {
+    "layout": "columns",
+    "boxColor": "#7A2E5C",
+    "headline": "Every assistant on your desk. One set of keys.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Monday, Claude Code needed your GitHub token. Tuesday, Cursor wanted it too. By Friday it was in six config files, two of them in plain text, and one of them was out of date."
+      },
+      {
+        "heading": "Patch it in once.",
+        "body": "Patchbay keeps your MCP servers in one place and plugs every assistant into them through a single gateway on your Mac. Claude Code, Codex, Cursor, VS Code, opencode, pi and the rest each get one entry, written for them. Add a server once and they all have it."
+      },
+      {
+        "heading": "The keys stay in the Keychain.",
+        "body": "Paste a server's key once, into a masked field. Patchbay keeps it in the Keychain and hands it to the server, never to the assistant. A server that signs in with OAuth opens your browser once, and Patchbay keeps the token fresh."
+      },
+      {
+        "heading": "Paste the README.",
+        "body": "Copy the JSON block from a server's README, or its npx line, or just its URL, and press ⌘N. Patchbay reads it, takes the keys out, and shows you what it will add before it adds anything."
+      },
+      {
+        "heading": "Not everyone gets everything.",
+        "body": "Give Cursor only Linear. Give Claude Code the lot, an entry for each server. Give a crowded assistant three tools that find the rest, and let it keep its context for the work."
+      },
+      {
+        "body": "Visit the Phin Tech Store and plug in."
+      }
+    ],
+    "tagline": "Patch things up.",
+    "finePrint": "Patchbay runs on macOS 14 Sonoma or later, with any assistant that speaks the Model Context Protocol. MCP servers are made by other people, mostly for free. Patch cables not included."
   }
 }

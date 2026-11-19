@@ -203,6 +203,18 @@
       "style": "box",
       "aspect": "3:4",
       "prompt": "a frantic 1980s Wall Street trading floor seen from above, packed with traders in shirtsleeves, loosened ties and suspenders shouting into corded telephones, waving papers, ticker tape and order slips flying through the air, rows of glowing green-screen monitors and a big scrolling board of blank lit panels along the back wall, a haze of cigarette smoke and steam, painted in dramatic warm amber and deep blue light, the scene filling every edge of the frame."
+    },
+    {
+      "name": "patchbay-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a gleaming brushed-chrome patch bay panel with rows of round jack sockets floating in a deep plum and teal gradient sky, three glowing patch cords in cherry red, mustard yellow and teal looping out of it and across the sky to three small floating generic beige desktop computers with blank fronts and no logos or badges of any kind, the cords curving like the orbits of planets, crisp airbrushed highlights."
+    },
+    {
+      "name": "patchbay-hero",
+      "style": "hero",
+      "aspect": "16:9",
+      "prompt": "a woman in a cozy 1980s home office, sleeves rolled up, plugging a red patch cord into a tall wooden-framed patch bay crowded with neatly looped red, yellow and teal cords, she looks quietly pleased with how tidy it is. The room is warm and lived-in: walnut wood panelling, a bookshelf of well-read books, a braided rug, a potted fern, a mug of coffee and a brass desk lamp. A beige computer sits on a wooden desk beside her, and a red patch cord runs from the patch bay up to the back of that computer, plainly connecting the two. Behind her is a 1980s Lisp machine, the artificial-intelligence workstation of the era, set up on its own desk: a large portrait-orientation monochrome monitor, taller than it is wide, above a wide keyboard with an extra row of function keys and a three-button mouse, and beside the desk its processor, a waist-high rack-mounted computer cabinet with vent slats, small amber status lights and a cooling grille, unmistakably a computer and not an appliance. The monitor shows a few lines of Lisp code full of nested parentheses, like (defun plug (cord jack) ...). A thick bundle of red, yellow and teal cords runs out of the back of the patch bay, across the floor and into the back of the Lisp machine. It is an office, not a studio: no mixing console, sound board, speakers, acoustic panels, foam or audio equipment anywhere. Warm tungsten lamplight and afternoon window light. The one exception to the no-text rule: the Lisp code on that monitor."
     }
   ]
 }
