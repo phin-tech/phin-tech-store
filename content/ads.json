@@ -487,6 +487,10 @@
         "body": "Give Cursor only Linear. Give Claude Code the lot, an entry for each server. Give a crowded assistant three tools that find the rest, and let it keep its context for the work."
       },
       {
+        "heading": "Skills, filed once.",
+        "body": "Paste the npx skills add line from skills.sh, tick the skills you want, and Patchbay files one copy in ~/.agents/skills and links it into Claude Code, Cursor, Gemini CLI and the rest. It keeps the same ledger as the skills CLI, so neither loses track of the other. The ones you wrote yourself stay yours until you say otherwise."
+      },
+      {
         "body": "Visit the Phin Tech Store and plug in."
       }
     ],
