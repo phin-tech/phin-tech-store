@@ -462,10 +462,10 @@
     "finePrint": "Boiler Room needs macOS 14 Sonoma or later. The scripts are yours; Boiler Room only runs them. Full-screen alerts need Slaps, also from Phin Tech. Coal not included."
   },
   "patchbay": {
-    "layout": "columns",
+    "layout": "photo",
     "boxColor": "#7A2E5C",
     "headline": "Every assistant on your desk. One set of keys.",
-    "kicker": "",
+    "kicker": "Introducing Patchbay.",
     "sections": [
       {
         "body": "Monday, Claude Code needed your GitHub token. Tuesday, Cursor wanted it too. By Friday it was in six config files, two of them in plain text, and one of them was out of date."
