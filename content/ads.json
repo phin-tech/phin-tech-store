@@ -498,10 +498,10 @@
     "finePrint": "Patchbay runs on macOS 14 Sonoma or later, with any assistant that speaks the Model Context Protocol. MCP servers are made by other people, mostly for free. Patch cables not included."
   },
   "playpen": {
-    "layout": "columns",
+    "layout": "photo",
     "boxColor": "#2F5D8C",
     "headline": "Let the agent loose. Keep the keys.",
-    "kicker": "",
+    "kicker": "Introducing Playpen.",
     "sections": [
       {
         "body": "Your coding agent is very good, and very keen. It would like to run npm, and curl, and whatever that was it found on the internet at two in the afternoon. You would like to know about it first."
@@ -532,5 +532,37 @@
     ],
     "tagline": "Room to play. Walls to match.",
     "finePrint": "Playpen needs macOS 14 Sonoma or later, OpenShell, and Docker or OpenShell's MicroVM driver. Claude Code and Codex are your own, and sold separately. Buckets and spades not included."
+  },
+  "Booth": {
+    "layout": "columns",
+    "boxColor": "#5A6B8C",
+    "headline": "The video's finished. Now it needs a voice.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Every scene rendered, and not one of them says a word. You wrote the narration weeks ago. It is in demo.json, and it has never once been read aloud, which is not the same as being good."
+      },
+      {
+        "heading": "The script, beside the picture.",
+        "body": "Open a demoreel project in Booth and each scene's video plays with its narration next to it, a teleprompter with a marker on the word to say now. What happens on screen (a bullet appears, a click, a key) shows as a tag in the script, so you know when to pause."
+      },
+      {
+        "heading": "It follows you, not a clock.",
+        "body": "Booth listens on this Mac and moves the marker to wherever you are. Mishear a word, skip one, say it twice: it keeps your place. Set the pace in words per minute, or let Booth fit it to the length of the scene."
+      },
+      {
+        "heading": "Take two, and only the half of it.",
+        "body": "Every take is kept as a .wav in the project's audio folder, and the scene uses whichever you choose. If one sentence went wrong, retake that chunk and leave the rest alone. If another take got it right, borrow its chunk."
+      },
+      {
+        "heading": "Fix the line where you stumbled on it.",
+        "body": "Edit the narration in Booth and it is written back into demo.json, one scene at a time. The order of your keys, your indentation and everything else in the file stay as you left them."
+      },
+      {
+        "body": "Visit the Phin Tech Store and say it right the first time. Or the third."
+      }
+    ],
+    "tagline": "Narration, take by take.",
+    "finePrint": "Booth requires macOS 14 Sonoma or later, a microphone, and a project made by demoreel, which is sold separately. Speech is recognised on your Mac and goes nowhere else. Throat lozenges not included."
   }
 }

@@ -227,6 +227,18 @@
       "style": "box",
       "aspect": "3:4",
       "prompt": "a wooden sandbox with painted sides floating in a vast sky, a small friendly tin robot building a golden sand castle inside it, a glowing translucent glass dome curving over the sandbox like a protective wall, a single luminous path of light leading out through a little gate, against a deep cobalt blue and warm amber gradient sky. The blue sky gradient runs right to all four edges of the image, with no border, frame, margin or white space, and no decorative shapes around the edge."
+    },
+    {
+      "name": "Booth-hero",
+      "style": "hero",
+      "aspect": "16:9",
+      "prompt": "a woman in a knit sweater and large over-ear headphones standing at a music stand inside a small carpeted recording booth lined with grey acoustic foam, a boom microphone with a round pop filter in front of her, reading from a few typed pages with a pencil behind her ear, a beige early-1980s computer on a wooden desk beside her whose screen shows a silent film frame, a cup of tea, a plain round red lamp glowing above the door with nothing written on it, the computer has a blank front with no logo or badge of any kind, nothing in the room has lettering, warm tungsten light."
+    },
+    {
+      "name": "Booth-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a giant vintage ribbon microphone standing in a vast sky, a long strip of film unspooling from a floating reel and wrapping around the microphone, the film frames turning into glowing concentric rings of sound waves, a small figure on a cloud below speaking toward it, against a deep dusty periwinkle and amber gradient sky that runs to every edge of the picture."
     }
   ]
 }
