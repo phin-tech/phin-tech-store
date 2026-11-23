@@ -215,6 +215,18 @@
       "style": "hero",
       "aspect": "16:9",
       "prompt": "a woman in a cozy 1980s home office, sleeves rolled up, plugging a red patch cord into a tall wooden-framed patch bay crowded with neatly looped red, yellow and teal cords, she looks quietly pleased with how tidy it is. The room is warm and lived-in: walnut wood panelling, a bookshelf of well-read books, a braided rug, a potted fern, a mug of coffee and a brass desk lamp. A beige computer sits on a wooden desk beside her, and a red patch cord runs from the patch bay up to the back of that computer, plainly connecting the two. Behind her is a 1980s Lisp machine, the artificial-intelligence workstation of the era, set up on its own desk: a large portrait-orientation monochrome monitor, taller than it is wide, above a wide keyboard with an extra row of function keys and a three-button mouse, and beside the desk its processor, a waist-high rack-mounted computer cabinet with vent slats, small amber status lights and a cooling grille, unmistakably a computer and not an appliance. The monitor shows a few lines of Lisp code full of nested parentheses, like (defun plug (cord jack) ...). A thick bundle of red, yellow and teal cords runs out of the back of the patch bay, across the floor and into the back of the Lisp machine. It is an office, not a studio: no mixing console, sound board, speakers, acoustic panels, foam or audio equipment anywhere. Warm tungsten lamplight and afternoon window light. The one exception to the no-text rule: the Lisp code on that monitor."
+    },
+    {
+      "name": "playpen-hero",
+      "style": "hero",
+      "aspect": "16:9",
+      "prompt": "a developer in a rolled-sleeve shirt sitting on a stool at a wide wooden workbench in a bright workshop, drinking coffee and watching a small wooden sandbox with low painted sides on the bench, where a little tin windup toy robot with a round head and jointed arms digs happily in clean sand and has built a tiny castle; a beige computer with a glowing screen at the end of the bench, a neat row of brass padlocks and keys hanging from a pegboard behind, afternoon window light."
+    },
+    {
+      "name": "playpen-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a wooden sandbox with painted sides floating in a vast sky, a small friendly tin robot building a golden sand castle inside it, a glowing translucent glass dome curving over the sandbox like a protective wall, a single luminous path of light leading out through a little gate, against a deep cobalt blue and warm amber gradient sky. The blue sky gradient runs right to all four edges of the image, with no border, frame, margin or white space, and no decorative shapes around the edge."
     }
   ]
 }

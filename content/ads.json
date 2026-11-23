@@ -496,5 +496,41 @@
     ],
     "tagline": "Patch things up.",
     "finePrint": "Patchbay runs on macOS 14 Sonoma or later, with any assistant that speaks the Model Context Protocol. MCP servers are made by other people, mostly for free. Patch cables not included."
+  },
+  "playpen": {
+    "layout": "columns",
+    "boxColor": "#2F5D8C",
+    "headline": "Let the agent loose. Keep the keys.",
+    "kicker": "",
+    "sections": [
+      {
+        "body": "Your coding agent is very good, and very keen. It would like to run npm, and curl, and whatever that was it found on the internet at two in the afternoon. You would like to know about it first."
+      },
+      {
+        "heading": "A sandbox of its own.",
+        "body": "Playpen makes an OpenShell sandbox for Claude Code or Codex, copies your folders in with their git history, and opens the agent in a terminal. Everything it does, it does in there. Press ⌘N, give it a name, and send it out to play."
+      },
+      {
+        "heading": "Nothing gets out unless you say.",
+        "body": "A sandbox may reach its model and the services you attached to it, and nothing else. When the agent tries somewhere new, Playpen shows you the program and the host, github.com:443, say. Approve, Reject, or Approve All. The agent tries again."
+      },
+      {
+        "heading": "The keys stay home.",
+        "body": "Your model key and your GitHub token live in OpenShell, gateway by gateway. The agent sees a stand-in, and OpenShell swaps in the real thing only on requests to that service."
+      },
+      {
+        "heading": "Your code, back as a branch.",
+        "body": "Bring Back returns what the agent did as a git branch, playpen/<sandbox>, in the repository it came from. Your working copy stays exactly as you left it."
+      },
+      {
+        "heading": "Docker, or a small machine of its own.",
+        "body": "Use Docker on this Mac, or let Playpen set up a MicroVM gateway where each sandbox is a little virtual machine with its own Linux kernel. Add a Kubernetes cluster and Playpen lists its sandboxes beside the rest."
+      },
+      {
+        "body": "Visit the Phin Tech Store and give your agent somewhere to play."
+      }
+    ],
+    "tagline": "Room to play. Walls to match.",
+    "finePrint": "Playpen needs macOS 14 Sonoma or later, OpenShell, and Docker or OpenShell's MicroVM driver. Claude Code and Codex are your own, and sold separately. Buckets and spades not included."
   }
 }
