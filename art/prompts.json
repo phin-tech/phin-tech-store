@@ -239,6 +239,18 @@
       "style": "box",
       "aspect": "3:4",
       "prompt": "a giant vintage ribbon microphone standing in a vast sky, a long strip of film unspooling from a floating reel and wrapping around the microphone, the film frames turning into glowing concentric rings of sound waves, a small figure on a cloud below speaking toward it, against a deep dusty periwinkle and amber gradient sky that runs to every edge of the picture."
+    },
+    {
+      "name": "LoopDeLoop-box",
+      "style": "box",
+      "aspect": "3:4",
+      "prompt": "a glossy black control console with six chunky silver knobs, a grid of twelve glowing jewel-coloured square keys and a row of eight little round buttons lit in rainbow colours, tilted and soaring through a deep rose and midnight-blue sky, while a ribbon of light swoops around it in a giant roller-coaster loop-the-loop, sparks trailing from the console's knobs."
+    },
+    {
+      "name": "LoopDeLoop-hero",
+      "style": "hero",
+      "aspect": "4:3",
+      "prompt": "a grinning man in a sweater vest with headphones around his neck at a home recording desk in a wood-panelled den, one hand turning a silver knob on a small black console whose twelve square keys glow in jewel colours, beside a beige computer whose green-phosphor screen shows a grid of coloured squares; a cassette deck, a coffee mug, a desk lamp and a spider plant around him."
     }
   ]
 }

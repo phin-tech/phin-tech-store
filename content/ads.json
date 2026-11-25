@@ -564,5 +564,29 @@
     ],
     "tagline": "Narration, take by take.",
     "finePrint": "Booth requires macOS 14 Sonoma or later, a microphone, and a project made by demoreel, which is sold separately. Speech is recognised on your Mac and goes nowhere else. Throat lozenges not included."
+  },
+  "LoopDeLoop": {
+    "layout": "product",
+    "boxColor": "#9D174D",
+    "headline": "All those knobs. All yours again.",
+    "kicker": "Introducing LoopDeLoop.",
+    "sections": [
+      {
+        "body": "You bought a handsome little console of knobs, buttons and glowing keys. Then its software stopped updating it, and the other software decided it was too old to talk to. LoopDeLoop talks to your Loupedeck Live directly, down its own USB cable, whatever firmware it is running."
+      },
+      {
+        "heading": "Every key, your way.",
+        "body": "Give each of the twelve touch keys a title, a colour and a picture. Pick from thousands of symbols, or bring your own. Then decide what it does when you tap it, when you hold it, and when you let go. Turn the knobs for volume, brightness or anything else you like, and light the eight round buttons in any colour of the rainbow."
+      },
+      {
+        "heading": "It knows your friends.",
+        "body": "LoopDeLoop runs your Keyboard Maestro macros, pulls BetterTouchTool's named triggers and calls Alfred workflows. And it listens back: a macro, a script or a quick \"loopctl set-key 3 --title 'On air'\" can change any key from anywhere. Give each app its own profile, and the whole deck changes when you switch."
+      },
+      {
+        "body": "LoopDeLoop lives in your menu bar, keeps itself up to date, installs with Homebrew, and runs on macOS 14 Sonoma or later. Visit the Phin Tech Store and take one home today."
+      }
+    ],
+    "tagline": "Every knob, back in the loop.",
+    "finePrint": "Works with the Loupedeck Live, tested on firmware 0.2.5. Loupedeck is a trademark of Logitech, which had nothing to do with this. Keyboard shortcuts need the Accessibility permission. Loop-de-loops performed by a professional driver on a closed course."
   }
 }
